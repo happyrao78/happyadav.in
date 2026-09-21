@@ -18,14 +18,15 @@ export default function About() {
             ))}
           </div>
 
-          <div className="stats" data-reveal>
-            {about.stats.map((stat) => (
-              <div className="stat" key={stat.label}>
-                <p className="stat-value">{stat.value}</p>
-                <p className="stat-label">{stat.label}</p>
-                <p className="stat-note">{stat.note}</p>
-              </div>
-            ))}
+          <div className="about-card" data-reveal style={{ '--i': 1 }}>
+            <dl>
+              {about.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </div>

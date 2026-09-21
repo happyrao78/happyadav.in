@@ -6,9 +6,9 @@ export default function Contact() {
   const { contact, links } = profile;
 
   const channels = [
-    { label: 'GitHub', value: '@happyrao78', href: links.github },
+    { label: 'GitHub', value: 'happyrao78', href: links.github },
     { label: 'LinkedIn', value: 'Connect', href: links.linkedin },
-    { label: 'Resume', value: 'Download CV', href: profile.resume },
+    { label: 'Resume', value: 'Download PDF', href: profile.resume },
   ];
 
   return (
@@ -17,7 +17,7 @@ export default function Contact() {
         <p className="eyebrow" data-reveal>
           {contact.eyebrow}
         </p>
-        <h2 className="contact-title" data-reveal style={{ '--i': 1, marginTop: '1.5rem' }}>
+        <h2 className="contact-title" data-reveal style={{ '--i': 1 }}>
           <Emphasis text={contact.title} />
         </h2>
         <p className="contact-body" data-reveal style={{ '--i': 2 }}>
@@ -37,10 +37,8 @@ export default function Contact() {
               rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
             >
               <span>
-                <span className="channel-label">{channel.label}</span>
-                <span className="channel-value" style={{ display: 'block' }}>
-                  {channel.value}
-                </span>
+                <span className="label">{channel.label}</span>
+                <span className="channel-value">{channel.value}</span>
               </span>
               <ArrowUpRight />
             </a>

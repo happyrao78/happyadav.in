@@ -41,7 +41,7 @@ export default function BlogPost({ slug }) {
         <div className="shell not-found">
           <p className="eyebrow">404</p>
           <h1 className="page-title">Post not found</h1>
-          <p className="page-lede">That link does not point at anything published yet.</p>
+          <p className="page-lede">That link does not point at a published blog.</p>
           <a
             className="btn"
             href="#/blog"
@@ -50,7 +50,7 @@ export default function BlogPost({ slug }) {
               navigate('/blog');
             }}
           >
-            <span>Back to the blog</span>
+            <span>Back to the blogs</span>
             <Arrow />
           </a>
         </div>
@@ -66,19 +66,16 @@ export default function BlogPost({ slug }) {
     <div className="page article">
       <Progress />
       <div className="shell">
-        <p style={{ maxWidth: '46rem', margin: '0 auto 2rem' }}>
-          <a
-            className="link"
-            href="#/blog"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate('/blog');
-            }}
-            style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--t-micro)', letterSpacing: '0.16em', textTransform: 'uppercase' }}
-          >
-            &larr; All posts
-          </a>
-        </p>
+        <a
+          className="back-link link"
+          href="#/blog"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate('/blog');
+          }}
+        >
+          &larr; All blogs
+        </a>
 
         <header className="article-head">
           <p className="post-meta">

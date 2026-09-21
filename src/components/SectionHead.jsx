@@ -1,11 +1,13 @@
-/** Renders `_word_` inside a title as display italic. */
+/** Renders `_word_` as the teal accent and `*word*` as semibold ink. */
 export function Emphasis({ text }) {
   return String(text)
-    .split(/(_[^_]+_)/)
+    .split(/(_[^_]+_|\*[^*]+\*)/)
     .filter(Boolean)
-    .map((chunk, i) =>
-      /^_[^_]+_$/.test(chunk) ? <em key={i}>{chunk.slice(1, -1)}</em> : <span key={i}>{chunk}</span>,
-    );
+    .map((chunk, i) => {
+      if (/^_[^_]+_$/.test(chunk)) return <em key={i}>{chunk.slice(1, -1)}</em>;
+      if (/^\*[^*]+\*$/.test(chunk)) return <b key={i}>{chunk.slice(1, -1)}</b>;
+      return <span key={i}>{chunk}</span>;
+    });
 }
 
 export default function SectionHead({ eyebrow, title, note }) {
