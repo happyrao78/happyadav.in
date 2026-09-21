@@ -28,13 +28,6 @@ export default function BlogPost({ slug }) {
   const post = getPost(slug);
   const content = useMemo(() => (post ? renderMarkdown(post.body) : null), [post]);
 
-  useEffect(() => {
-    if (post) document.title = `${post.title} — Happy Yadav`;
-    return () => {
-      document.title = 'Happy Yadav — Applied AI Engineer';
-    };
-  }, [post]);
-
   if (!post) {
     return (
       <div className="page">
@@ -44,7 +37,7 @@ export default function BlogPost({ slug }) {
           <p className="page-lede">That link does not point at a published blog.</p>
           <a
             className="btn"
-            href="#/blog"
+            href="/blog"
             onClick={(e) => {
               e.preventDefault();
               navigate('/blog');
@@ -68,7 +61,7 @@ export default function BlogPost({ slug }) {
       <div className="shell">
         <a
           className="back-link link"
-          href="#/blog"
+          href="/blog"
           onClick={(e) => {
             e.preventDefault();
             navigate('/blog');
@@ -102,7 +95,7 @@ export default function BlogPost({ slug }) {
             <nav className="post-nav">
               {older ? (
                 <a
-                  href={`#/blog/${older.slug}`}
+                  href={`/blog/${older.slug}`}
                   onClick={(e) => {
                     e.preventDefault();
                     navigate(`/blog/${older.slug}`);
@@ -114,7 +107,7 @@ export default function BlogPost({ slug }) {
               ) : null}
               {newer ? (
                 <a
-                  href={`#/blog/${newer.slug}`}
+                  href={`/blog/${newer.slug}`}
                   onClick={(e) => {
                     e.preventDefault();
                     navigate(`/blog/${newer.slug}`);

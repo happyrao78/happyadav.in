@@ -244,9 +244,9 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1040px) {
   .metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -354,6 +354,15 @@
 .cap-title {
   font-size: var(--t-h3);
   font-weight: 600;
+}
+
+.cap-punch {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  color: var(--teal);
+  max-width: 34ch;
 }
 
 .cap-body {
@@ -495,12 +504,36 @@
   flex-shrink: 0;
 }
 
-.acc-name {
+.acc-head {
   flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.acc-name {
   font-size: clamp(0.98rem, 1.6vw, 1.15rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.25;
+}
+
+.acc-punch {
+  font-size: var(--t-small);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  transition: color 0.3s var(--ease);
+}
+
+.acc.is-open .acc-punch,
+.acc-btn:hover .acc-punch {
+  color: var(--teal);
+}
+
+.acc-side {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
 }
 
 .acc-sign {
@@ -564,8 +597,12 @@
 @media (min-width: 1060px) {
   .acc-inner {
     grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
-    gap: 2.75rem;
+    gap: 1.25rem 2.75rem;
     align-items: start;
+  }
+
+  .acc-inner > .stat-row {
+    grid-column: 1 / -1;
   }
 }
 
@@ -833,4 +870,153 @@
 
 .footer a:hover {
   color: var(--ink);
+}
+
+/* ---------- Project figures ---------- */
+
+/* Dividers come from the cells, not a background grid, so an odd count
+   never leaves an empty tile behind. */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.stat-row > div {
+  padding: 0.7rem 0.85rem;
+  display: grid;
+  gap: 0.1rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -1px -1px 0;
+}
+
+.stat-row dt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-row dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--ink-faint);
+}
+
+.project-aside .stat-row {
+  margin-top: 0.35rem;
+}
+
+/* On phones the grid is always two wide, so let an odd last figure span the row
+   rather than leaving an empty tile beside it. */
+@media (max-width: 560px) {
+  .stat-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-row > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Ventures ---------- */
+
+.ventures {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.venture {
+  background: var(--paper-3);
+  padding: clamp(1.5rem, 3vw, 2.35rem);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: background 0.4s var(--ease);
+}
+
+.venture:hover {
+  background: var(--paper-2);
+}
+
+.venture-head {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+}
+
+.venture-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--r-full);
+  background: var(--teal-soft);
+  color: var(--teal-ink);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.venture-status i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: blip 2.2s var(--ease) infinite;
+}
+
+.venture-name {
+  font-size: var(--t-h3);
+  font-weight: 600;
+}
+
+.venture-domain {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  color: var(--ink-soft);
+}
+
+.venture-domain:hover {
+  color: var(--teal);
+}
+
+.venture-punch {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+  max-width: 30ch;
+}
+
+.venture-body {
+  color: var(--ink-soft);
+  font-size: var(--t-small);
+  line-height: 1.6;
+  max-width: 50ch;
+}
+
+@media (min-width: 820px) {
+  .ventures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
 }

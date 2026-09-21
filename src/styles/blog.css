@@ -4,16 +4,16 @@
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   background: var(--paper-3);
-  padding: clamp(1.75rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
   display: grid;
-  gap: 1.5rem;
+  gap: 1.1rem;
+  justify-items: start;
 }
 
 .soon-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  justify-self: start;
   padding: 0.35rem 0.8rem;
   border-radius: var(--r-full);
   background: var(--teal-soft);
@@ -37,52 +37,12 @@
   50% { opacity: 0.25; }
 }
 
-.soon-title {
-  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  max-width: 28ch;
-}
-
-.soon-body {
-  color: var(--ink-soft);
-  max-width: 66ch;
-}
-
-.soon-topics {
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  overflow: hidden;
-}
-
-.soon-topic {
-  background: var(--paper);
-  padding: 1rem 1.15rem;
-  display: grid;
-  gap: 0.3rem;
-}
-
-.soon-topic strong {
-  font-weight: 500;
-  font-size: var(--t-small);
-  letter-spacing: -0.015em;
-}
-
-.soon-topic span {
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-@media (min-width: 760px) {
-  .soon-topics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.soon-line {
+  font-size: var(--t-lede);
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  color: var(--ink-2);
+  max-width: 34ch;
 }
 
 /* ---------- Pages ---------- */

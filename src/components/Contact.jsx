@@ -3,12 +3,15 @@ import { Emphasis } from './SectionHead.jsx';
 import { ArrowUpRight } from './Icons.jsx';
 
 export default function Contact() {
-  const { contact, links } = profile;
+  const { contact, links, handles } = profile;
 
   const channels = [
-    { label: 'GitHub', value: 'happyrao78', href: links.github },
+    { label: 'X', value: `@${handles.x}`, href: links.x },
     { label: 'LinkedIn', value: 'Connect', href: links.linkedin },
+    { label: 'GitHub', value: handles.github, href: links.github },
+    { label: 'Reddit', value: handles.reddit, href: links.reddit },
     { label: 'Resume', value: 'Download PDF', href: profile.resume },
+    { label: 'Phone', value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` },
   ];
 
   return (
@@ -28,21 +31,24 @@ export default function Contact() {
         </a>
 
         <div className="contact-channels" data-reveal style={{ '--i': 4 }}>
-          {channels.map((channel) => (
-            <a
-              className="channel"
-              key={channel.label}
-              href={channel.href}
-              target={channel.href.startsWith('http') ? '_blank' : undefined}
-              rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
-            >
-              <span>
-                <span className="label">{channel.label}</span>
-                <span className="channel-value">{channel.value}</span>
-              </span>
-              <ArrowUpRight />
-            </a>
-          ))}
+          {channels.map((channel) => {
+            const external = channel.href.startsWith('http');
+            return (
+              <a
+                className="channel"
+                key={channel.label}
+                href={channel.href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'me noreferrer' : undefined}
+              >
+                <span>
+                  <span className="label">{channel.label}</span>
+                  <span className="channel-value">{channel.value}</span>
+                </span>
+                <ArrowUpRight />
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

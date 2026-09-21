@@ -43,7 +43,7 @@ export default function Recognition() {
           <p className="eyebrow">{education.eyebrow}</p>
           <h3 className="edu-degree">{education.degree}</h3>
           <p className="edu-meta">
-            {education.field} &middot; {education.institution} &middot; {education.location}
+            {education.field} &middot; {education.institution}
           </p>
         </div>
       </div>

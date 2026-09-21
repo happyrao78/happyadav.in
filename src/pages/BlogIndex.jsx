@@ -5,36 +5,8 @@ import profile from '../content/profile.js';
 import { Emphasis } from '../components/SectionHead.jsx';
 import { SearchIcon, Arrow } from '../components/Icons.jsx';
 
-function Soon() {
-  const { writing } = profile;
-
-  return (
-    <div className="soon" data-reveal>
-      <span className="soon-badge">
-        <i aria-hidden="true" />
-        {writing.badge}
-      </span>
-      <h2 className="soon-title">{writing.page.empty}</h2>
-      <p className="soon-body">{writing.body}</p>
-      <div className="soon-topics">
-        {writing.topics.map((topic) => (
-          <div className="soon-topic" key={topic.title}>
-            <span>{topic.tag}</span>
-            <strong>{topic.title}</strong>
-          </div>
-        ))}
-      </div>
-      <p>
-        <a className="btn btn--solid" href={`mailto:${profile.email}?subject=Ping%20me%20when%20you%20publish`}>
-          <span>Tell me when it lands</span>
-          <Arrow />
-        </a>
-      </p>
-    </div>
-  );
-}
-
 export default function BlogIndex() {
+  const { writing } = profile;
   const [query, setQuery] = useState('');
   const [tag, setTag] = useState('All');
 
@@ -58,18 +30,22 @@ export default function BlogIndex() {
       <div className="shell">
         <header className="page-head">
           <p className="eyebrow" data-reveal>
-            {profile.writing.eyebrow}
+            {writing.eyebrow}
           </p>
           <h1 className="page-title" data-reveal style={{ '--i': 1 }}>
-            <Emphasis text={profile.writing.page.title} />
+            <Emphasis text={posts.length ? 'Technical blogs on _applied_ AI' : writing.title} />
           </h1>
-          <p className="page-lede" data-reveal style={{ '--i': 2 }}>
-            {profile.writing.page.lede}
-          </p>
+
         </header>
 
         {posts.length === 0 ? (
-          <Soon />
+          <div className="soon" data-reveal>
+            <span className="soon-badge">
+              <i aria-hidden="true" />
+              {writing.badge}
+            </span>
+            <p className="soon-line">{writing.line}</p>
+          </div>
         ) : (
           <>
             <div className="blog-controls">
@@ -103,7 +79,7 @@ export default function BlogIndex() {
                   <a
                     className={`post-card${i === 0 && tag === 'All' && !query ? ' post-card--lead' : ''}`}
                     key={post.slug}
-                    href={`#/blog/${post.slug}`}
+                    href={`/blog/${post.slug}`}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(`/blog/${post.slug}`);

@@ -17,7 +17,8 @@ npm run preview
 | --- | --- |
 | Every word on the home page | `src/content/profile.js` |
 | Blog posts | `src/content/posts/*.md` |
-| Company logos, resume PDF, favicon | `public/` |
+| Company logos, resume PDF, icons, OG image | `public/` |
+| robots.txt, manifest, host rewrites | `public/` |
 | Design tokens (colour, type, spacing) | `src/styles/tokens.css` |
 
 Nothing in `src/components/` holds copy. To change the site, edit
@@ -88,11 +89,65 @@ of the first two words, so a missing file never breaks the layout.
 
 ## Routing
 
-Hash based, so the site deploys to any static host with no rewrite rules.
+Real paths, not hash fragments, because search engines and social scrapers treat
+`/#/blog` as the same page as `/`.
 
 - `/` home
-- `/#/blog` blog index, or the "dropping soon" state while empty
-- `/#/blog/<slug>` article
+- `/blog` blog index, or the "cooking" state while empty
+- `/blog/<slug>` article
+
+Old `/#/blog` links still work: `upgradeLegacyHash()` in `src/lib/router.js`
+rewrites them to the real path before the first render.
+
+## SEO
+
+`npm run build` runs `scripts/postbuild.mjs` after Vite, which does three things:
+
+1. **Prerenders a real HTML file per route** with its own title, description,
+   canonical and Open Graph tags. X, WhatsApp, LinkedIn and Slack do not run
+   JavaScript, so without this every route would share the home page preview.
+   `/blog` ships as `dist/blog/index.html`, each post as
+   `dist/blog/<slug>/index.html`.
+2. **Generates `sitemap.xml`** from the routes plus every Markdown post, with
+   `lastmod` taken from each post's date.
+3. **Writes `404.html`** as an SPA fallback for hosts that need one.
+
+Also in place: `robots.txt` naming the sitemap and allowing the preview crawlers
+by name, JSON-LD `Person`, `WebSite`, `ProfilePage`, `Organization` (one per
+venture) and `BlogPosting` entities from `src/lib/seo.js`, a web manifest, and
+`max-image-preview:large` so Google may use the large card.
+
+### Link previews
+
+`public/og.png` is the 1200x630 card used by every platform. To regenerate it,
+render an HTML card at that size and screenshot it:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --window-size=1200,630 --screenshot=public/og.png file://$PWD/card.html
+```
+
+Keep it under about 300KB or WhatsApp will skip it. The current file is 48KB.
+
+### Deploying
+
+Rewrite configs ship for the common hosts, so no setup is needed:
+
+- Vercel: `vercel.json`
+- Netlify and Cloudflare Pages: `public/_redirects`
+- GitHub Pages: the generated `dist/404.html`
+
+If you move off `happyadav.in`, change `SITE` in `scripts/postbuild.mjs` and
+`seo.siteUrl` in `src/content/profile.js`.
+
+## Sections
+
+`profile.ventures` drives the "Building now" block for rentalease.in and
+placeholderworks.com. Add another entry and a third card appears.
+
+Project level figures live on the project itself, in `stats`, and render through
+`src/components/StatRow.jsx`. The Impact section stays business only: clients,
+volume, efficiency and people. Keep it that way, otherwise the two blur.
 
 ## The impact section
 

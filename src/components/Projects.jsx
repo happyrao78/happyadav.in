@@ -1,5 +1,6 @@
 import profile from '../content/profile.js';
 import SectionHead from './SectionHead.jsx';
+import StatRow from './StatRow.jsx';
 
 export default function Projects() {
   const { projects } = profile;
@@ -10,7 +11,7 @@ export default function Projects() {
         <SectionHead
           eyebrow={projects.eyebrow}
           title={projects.title}
-          note="Systems I designed end to end, from the audio transport up to the evaluation harness."
+          note="Designed end to end, from the audio transport up to the evaluation harness."
         />
 
         <div>
@@ -20,7 +21,8 @@ export default function Projects() {
                 <p className="project-year">{project.year}</p>
                 <h3 className="project-name">{project.name}</h3>
                 <p className="project-tagline">{project.tagline}</p>
-                <div className="tags" style={{ marginTop: '0.5rem' }}>
+                <StatRow items={project.stats} />
+                <div className="tags">
                   {project.stack.map((tech) => (
                     <span className="tag" key={tech}>
                       {tech}

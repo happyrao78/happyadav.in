@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import profile from '../content/profile.js';
 import SectionHead from './SectionHead.jsx';
+import StatRow from './StatRow.jsx';
 
 /** Initials from the first two words, e.g. "Aditya Birla" becomes AB. */
 function initials(name) {
@@ -35,19 +36,25 @@ function ProjectAccordion({ projects }) {
           <div className={`acc${isOpen ? ' is-open' : ''}`} key={project.name}>
             <button className="acc-btn" onClick={() => setOpen(isOpen ? -1 : i)} aria-expanded={isOpen}>
               <span className="acc-num">{String(i + 1).padStart(2, '0')}</span>
-              <span className="acc-name">{project.name}</span>
+              <span className="acc-head">
+                <span className="acc-name">{project.name}</span>
+                {project.punch ? <span className="acc-punch">{project.punch}</span> : null}
+              </span>
               <span className="acc-sign" aria-hidden="true" />
             </button>
 
             <div className="acc-panel">
               <div>
                 <div className="acc-inner">
-                  <div className="tags">
-                    {project.stack.map((tech) => (
-                      <span className="tag" key={tech}>
-                        {tech}
-                      </span>
-                    ))}
+                  <StatRow items={project.stats} />
+                  <div className="acc-side">
+                    <div className="tags">
+                      {project.stack.map((tech) => (
+                        <span className="tag" key={tech}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <ul className="bullets">
                     {project.points.map((point, n) => (
@@ -84,7 +91,6 @@ export default function Experience() {
                 <h3 className="role-title">{role.title}</h3>
                 <div className="role-meta">
                   <span>{role.period}</span>
-                  <span>{role.location}</span>
                 </div>
               </header>
 

@@ -3,6 +3,7 @@ import LogoStrip from '../components/LogoStrip.jsx';
 import Metrics from '../components/Metrics.jsx';
 import About from '../components/About.jsx';
 import Capabilities from '../components/Capabilities.jsx';
+import Ventures from '../components/Ventures.jsx';
 import Experience from '../components/Experience.jsx';
 import Projects from '../components/Projects.jsx';
 import Stack from '../components/Stack.jsx';
@@ -18,6 +19,7 @@ export default function Home() {
       <Metrics />
       <About />
       <Capabilities />
+      <Ventures />
       <Experience />
       <Projects />
       <Stack />

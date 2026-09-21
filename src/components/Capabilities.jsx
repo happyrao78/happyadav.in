@@ -14,6 +14,7 @@ export default function Capabilities() {
             <article className="cap" key={item.index}>
               <p className="cap-index">{item.index}</p>
               <h3 className="cap-title">{item.title}</h3>
+              <p className="cap-punch">{item.punch}</p>
               <p className="cap-body">{item.body}</p>
             </article>
           ))}

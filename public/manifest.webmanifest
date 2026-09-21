@@ -1,0 +1,14 @@
+{
+  "name": "Happy Yadav | Applied AI Engineer",
+  "short_name": "Happy Yadav",
+  "description": "Applied AI Engineer building real time voice agents, multi channel chat systems and LLM evaluation platforms.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#FAFAF7",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

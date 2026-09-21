@@ -1,6 +1,6 @@
 /**
  * Every word of site copy lives here. Edit this file to update the portfolio.
- * Nothing in src/components reads copy from anywhere else.
+ * Nothing in src/components holds copy.
  *
  * Markup helpers inside strings:
  *   _word_  renders in the teal accent
@@ -11,26 +11,56 @@ export const profile = {
   name: 'Happy Yadav',
   wordmark: ['HAPPY', 'YADAV'],
   role: 'Applied AI Engineer',
-  location: 'Gurugram, Haryana, India',
   email: 'happy.yadav.ai@gmail.com',
   phone: '+91 85958 64036',
   resume: '/Happy_Yadav_AI_Engineer.pdf',
 
-  // NOTE: confirm the LinkedIn handle; it is the one field not present in the resume PDF.
   links: {
     github: 'https://github.com/happyrao78',
-    linkedin: 'https://www.linkedin.com/in/happyrao78',
+    linkedin: 'https://www.linkedin.com/in/happy-yadav-16b2a4287',
+    x: 'https://x.com/rao_happyy',
+    reddit: 'https://www.reddit.com/user/happy_yadav',
+  },
+
+  handles: {
+    github: 'happyrao78',
+    linkedin: 'happy-yadav',
+    x: 'rao_happyy',
+    reddit: 'u/happy_yadav',
+  },
+
+  seo: {
+    siteUrl: 'https://happyadav.in',
+    title: 'Happy Yadav | Applied AI Engineer',
+    description:
+      'Applied AI Engineer building real time voice agents, multi channel chat systems and LLM evaluation platforms. Live in production across phone, web and WhatsApp.',
+    image: '/og.png',
+    imageAlt: 'Happy Yadav, Applied AI Engineer',
+    keywords:
+      'Applied AI Engineer, Voice AI, real time voice agents, LiveKit, pipecat, LangGraph, RAG, MCP, LLM evaluation, conversational AI, FastAPI, Happy Yadav',
+    routes: {
+      '/': {
+        title: 'Happy Yadav | Applied AI Engineer',
+        description:
+          'Applied AI Engineer building real time voice agents, multi channel chat systems and LLM evaluation platforms. Live in production across phone, web and WhatsApp.',
+      },
+      '/blog': {
+        title: 'Technical blogs | Happy Yadav',
+        description:
+          'Technical deep dives on real time voice systems, agentic pipelines and LLM evaluation, written from what actually shipped.',
+      },
+    },
   },
 
   hero: {
     eyebrow: 'Applied AI Engineer',
     headline: ['Applied AI that', '_holds up_.'],
     lede:
-      'I build real time voice agents, multi channel chat systems and the evaluation harnesses that keep them honest. *In production today*, across telephony, web and WhatsApp.',
+      'Voice agents that answer before you finish the question. Chat that remembers three messages back. And the harnesses that prove both actually work. *All of it live today.*',
     strip: [
-      { label: 'Currently', value: 'EaseMyTrip, Gurugram' },
+      { label: 'Currently', value: 'EaseMyTrip' },
+      { label: 'Also building', value: 'RentaLease, Placeholder' },
       { label: 'Focus', value: 'Voice, chat, multimodal' },
-      { label: 'Turn budget', value: 'Under 900 ms' },
       { label: 'Scroll', value: 'To explore' },
     ],
   },
@@ -51,46 +81,35 @@ export const profile = {
     ],
   },
 
+  // Business outcomes only. Anything project specific lives on the project itself.
   metrics: {
     eyebrow: 'Impact',
     title: 'Outcomes, not _output_',
-    note: 'What the work added up to, measured the way a business would measure it.',
+    note: 'Measured the way a business would measure it.',
     items: [
       {
         to: 100,
         suffix: 'K+',
         label: 'Conversations handled',
-        line: 'Calls and chats the agents have carried in production, across phone, web and WhatsApp.',
+        line: 'Live customer conversations carried end to end. Every one answered on the first ring.',
       },
       {
         to: 20,
         suffix: '+',
-        label: 'Enterprise clients served',
-        line: 'Businesses running on the data pipelines and reporting systems I built for them.',
+        label: 'Clients served',
+        line: 'Businesses that kept the systems running long after I handed them over.',
       },
       {
         to: 30,
         suffix: '%',
-        label: 'Faster reporting delivered',
-        line: 'Taken straight off the reporting cycle for clients sitting on six figure record counts.',
-      },
-      {
-        to: 21,
-        suffix: '',
-        label: 'Departments automated',
-        line: 'Support teams whose daily drafting now happens without anyone hunting for a template.',
+        label: 'Efficiency delivered',
+        line: 'Time taken straight off the reporting cycle. Same team, same data, fewer hours.',
       },
       {
         to: 100,
         suffix: '+',
         label: 'Engineers mentored',
-        line: 'Juniors and club members taken from following tutorials to shipping real projects.',
-      },
-      {
-        to: 4,
-        suffix: '',
-        label: 'Customer channels live',
-        line: 'Phone, web, WhatsApp and ChatGPT, with one backend answering on all four.',
+        line: 'Taken from following tutorials to shipping things other people actually use.',
       },
     ],
   },
@@ -104,9 +123,9 @@ export const profile = {
       'I work across the stack, Python and FastAPI on the backend, React on the front, containerised and instrumented so the thing that ships is the thing you can actually debug.',
     ],
     facts: [
-      { label: 'Based in', value: 'Gurugram, Haryana, India' },
       { label: 'Languages shipped', value: 'Hindi and English, in the same live agent' },
       { label: 'Deepest work', value: 'Real time audio, agentic graphs, LLM evaluation' },
+      { label: 'Reply time', value: 'Same day, usually sooner' },
       { label: 'Open to', value: 'Voice AI and agentic platform engineering' },
     ],
   },
@@ -118,26 +137,58 @@ export const profile = {
       {
         index: '01',
         title: 'Real time voice',
+        punch: 'No queue. No hold music. No “your call is important to us”.',
         body:
-          'One pipeline, two wire formats. Phone calls and browser widgets share the same brain, with barge in, contextual hold phrases and stale reply suppression tuned until it stops sounding like a machine.',
+          'One pipeline serving phone calls and browser widgets alike, with interruption handling, contextual hold phrases and stale reply suppression tuned until nobody asks whether it is a bot.',
       },
       {
         index: '02',
         title: 'Conversational AI',
+        punch: 'It remembers what you said three messages ago.',
         body:
-          'Chat that remembers. Persistent multi turn context, channel aware prompts, and tool calling that asks for exactly what it needs and refuses to invent the rest.',
+          'Persistent multi turn context, channel aware prompting, and tool calling that asks for exactly what it needs and refuses to invent the rest.',
       },
       {
         index: '03',
         title: 'Multimodal and agentic',
+        punch: 'Send a screenshot. It reads it and gets on with the job.',
         body:
-          'Voice, text, screenshots and PDFs into one graph. OCR fallbacks, reversible PII masking, and confidence gated retries that know when a draft is not good enough to send.',
+          'Voice, text, documents and images into one graph, with OCR fallbacks, reversible masking and retry loops that know when a draft is not good enough to send.',
       },
       {
         index: '04',
         title: 'Evaluation and benchmarking',
+        punch: 'If you cannot score it, you cannot ship it.',
         body:
-          'If you cannot score it, you cannot ship it. LLM as judge metrics, fully custom criteria, multimodal scoring for image and video, and live audio in audio out benchmarking.',
+          'Judge model metrics, fully custom criteria, multimodal scoring for generated image and video, and live audio benchmarking across five providers.',
+      },
+    ],
+  },
+
+  ventures: {
+    eyebrow: 'Building now',
+    title: 'Two products, _in build_',
+    note: 'Side by side with my og team, shipped the same way as everything else.',
+    items: [
+      {
+        name: 'RentaLease',
+        domain: 'rentalease.in',
+        url: 'https://www.rentalease.in/',
+        status: 'In build',
+        punch: 'Zero brokerage. See what your neighbours actually pay.',
+        body:
+          'A rent map built on real numbers instead of listings. Renters post what they pay anonymously, browse what everyone around them pays, find flatmates and reach owners directly. No brokers in the middle, no signup wall, free to use.',
+        tags: ['Marketplace', 'Zero brokerage', 'Community data'],
+      },
+      {
+        name: 'Placeholder',
+        domain: 'placeholderworks.com',
+        url: 'https://placeholderworks.com/',
+        status: 'In build',
+        punch: 'AI engineering and implementation. Shipped, not scoped.',
+        body:
+          'A studio that builds the systems we have already run in production: voice agents, retrieval grounded assistants and agentic automation, delivered as working software with instrumentation and a handover, rather than a deck.',
+        tags: ['AI studio', 'Voice and agents', 'Implementation'],
       },
     ],
   },
@@ -145,20 +196,25 @@ export const profile = {
   experience: {
     eyebrow: 'Experience',
     title: 'Where the work actually runs',
-    note: 'Open any project to read what was built and why it was built that way.',
+    note: 'Open any project for the numbers and the reasoning behind it.',
     roles: [
       {
         company: 'EaseMyTrip.com',
         logo: '/logos/easemytrip.png',
         title: 'Applied AI Engineer',
         period: 'Aug 2025 to Present',
-        location: 'Gurugram, Haryana, India',
         current: true,
         summary:
-          'The voice and conversational AI layer behind one of India’s largest online travel platforms. Telephony, web, WhatsApp and ChatGPT, all running off the same backend.',
+          'The voice and conversational AI layer behind one of India’s largest online travel platforms. Phone, web, WhatsApp and ChatGPT, all answering off the same backend.',
         projects: [
           {
             name: 'Real time voice AI agent',
+            punch: 'Picks up on the first ring. Answers before you finish asking.',
+            stats: [
+              { value: '900ms', label: 'End to end turn budget' },
+              { value: '200ms', label: 'Barge in response' },
+              { value: '2', label: 'Wire formats, one pipeline' },
+            ],
             stack: ['Deepgram Nova-3', 'Groq', 'Murf', 'WebRTC', 'Acefone', 'PSTN'],
             points: [
               'Built one channel agnostic voice pipeline, speech to text into turn detection into LLM into speech, that serves both PSTN calls and an in browser voice widget, with custom wire format serializers (µ-law and PCM at 8 kHz) for Acefone plus a WebRTC path for the web. Integrated Deepgram Nova-3, Groq and pluggable TTS (Murf, Gemini, Sarvam, OpenAI) behind a single provider factory, tuned to a sub 900 ms end to end turn budget with per stage latency instrumentation.',
@@ -168,6 +224,11 @@ export const profile = {
           },
           {
             name: 'Multi channel conversational AI',
+            punch: 'One brain. Every channel. Same memory.',
+            stats: [
+              { value: '2', label: 'LLM providers, hot swapped' },
+              { value: '2', label: 'Channels off one service' },
+            ],
             stack: ['LangChain', 'PostgreSQL', 'Redis', 'Groq', 'OpenAI'],
             points: [
               'Built the core chatbot service powering both the website and the WhatsApp bot, with persistent multi turn context via PostgreSQL backed JSONB chat history and Redis session caching.',
@@ -177,6 +238,11 @@ export const profile = {
           },
           {
             name: 'WhatsApp travel bot',
+            punch: 'Books a flight in the same chat you send memes in.',
+            stats: [
+              { value: '1 hr', label: 'Session TTL' },
+              { value: '30 min', label: 'Pending data TTL' },
+            ],
             stack: ['Meta Webhooks', 'Redis', 'Docker', 'FastAPI'],
             points: [
               'Engineered a production WhatsApp bot wired into the core chatbot service through Meta Webhook APIs, handling real time message routing, session management and structured payload rendering for travel queries.',
@@ -186,6 +252,11 @@ export const profile = {
           },
           {
             name: 'MCP tool calling framework',
+            punch: 'The model stops guessing and starts calling real APIs.',
+            stats: [
+              { value: '2', label: 'Stage execution pipeline' },
+              { value: '6+', label: 'Enterprise tool families' },
+            ],
             stack: ['MCP', 'LangChain', 'Enterprise APIs', 'OTP Auth'],
             points: [
               'Contributed to the MCP based tool ecosystem enabling dynamic enterprise API invocations: flight search, hotel lookup, train and bus booking, post and pre booking operations, and OTP based login.',
@@ -195,6 +266,13 @@ export const profile = {
           },
           {
             name: 'Agentic email automation',
+            punch: '434 templates. Nobody hunts through them anymore.',
+            stats: [
+              { value: '434', label: 'Live templates covered' },
+              { value: '21', label: 'Departments served' },
+              { value: '85', label: 'Quality score gate' },
+              { value: '0', label: 'PII reaching the model' },
+            ],
             stack: ['LangGraph', 'Presidio', 'BM25', 'PyMuPDF', 'RapidOCR', 'Docker'],
             points: [
               'Built an agentic email drafting engine that auto generates grounded customer support replies, replacing manual template hunting across 21 departments and 434 live templates. Architected a 10 stage LangGraph pipeline covering intent detection, booking enrichment, template selection, drafting and QA, with a confidence gated retry loop where a strict scorer grades each draft from 0 to 100 and regenerates with targeted feedback below an 85 threshold, hard capped at 3 attempts for bounded latency and cost.',
@@ -204,6 +282,8 @@ export const profile = {
           },
           {
             name: 'ChatGPT app integration',
+            punch: 'Travel search, inside the chat you already have open.',
+            stats: [{ value: '1', label: 'App live inside ChatGPT' }],
             stack: ['MCP', 'ChatGPT Apps', 'Enterprise APIs'],
             points: [
               'Contributed to launching the MCP powered ChatGPT App by exposing enterprise travel APIs as production ready MCP tools for conversational AI interactions inside ChatGPT.',
@@ -216,10 +296,9 @@ export const profile = {
         company: 'Independent',
         title: 'Freelance AI Engineer',
         period: '2024 to Present',
-        location: 'Remote',
         current: true,
         summary:
-          'Selected engagements for teams that need a voice agent, an assistant or an automation actually working in front of customers, not sitting in a notebook.',
+          'Selected engagements for teams that need a voice agent, an assistant or an automation working in front of customers, not sitting in a notebook.',
         points: [
           'Design and ship end to end voice agents across telephony and browser transports: streaming speech to text, turn detection, model reasoning and synthesis, tuned against a latency budget agreed before a line of code is written.',
           'Build retrieval grounded chat assistants over client knowledge bases and documents, with persistent session context, channel aware prompting and tool calling into the systems a business already runs on.',
@@ -232,7 +311,6 @@ export const profile = {
         logo: '/logos/hunar.png',
         title: 'Backend Developer Intern',
         period: 'Jun 2025 to Aug 2025',
-        location: 'Gurugram, India',
         summary: 'Backend and data pipeline work on a reporting platform used by enterprise clients.',
         points: [
           'Designed and optimised PostgreSQL query pipelines for data extraction workflows serving more than 20 enterprise clients across 100,000+ records, improving reporting efficiency by 30 percent.',
@@ -245,7 +323,6 @@ export const profile = {
         logo: '/logos/chitkara.png',
         title: 'Technical Lead',
         period: '2023 to 2025',
-        location: 'Punjab, India',
         summary: 'Ran the technical programme for one of the university’s largest engineering communities.',
         points: [
           'Led technical workshops and mentored more than 100 club members on AI and ML, full stack development and competitive programming.',
@@ -262,8 +339,12 @@ export const profile = {
     items: [
       {
         name: 'ComplaintHub',
-        tagline: 'Citizens file complaints by talking. Nobody has to pick up.',
+        tagline: 'File a complaint by talking. Nobody has to pick up.',
         year: '2025',
+        stats: [
+          { value: '3', label: 'Voice pipelines benchmarked' },
+          { value: '0', label: 'Human agents in the loop' },
+        ],
         stack: ['GPT-4o Realtime', 'Gemini Native Audio', 'Whisper', 'Silero VAD', 'Twilio', 'Exotel', 'FFmpeg'],
         points: [
           'Built a fully automated voice to voice citizen complaint registration system where people interact entirely through natural speech on a live call, with no human agent involved. The pipeline ingests live audio, transcribes it, reasons over a model and delivers a synthesised spoken response, completing the full complaint lifecycle end to end.',
@@ -277,6 +358,10 @@ export const profile = {
         name: 'Syntropy Labs',
         tagline: 'Four services that decide whether your model is actually any good.',
         year: '2025',
+        stats: [
+          { value: '4', label: 'Containerised services' },
+          { value: '5', label: 'Providers behind one API' },
+        ],
         stack: ['FastAPI', 'LiteLLM', 'MongoDB', 'WebSocket', 'JWT', 'Google Cloud Storage'],
         points: [
           'Architected an LLM evaluation platform across four containerised microservices: an Orchestrator as the central API gateway for JWT auth, organisation and project management, dataset lifecycle and job orchestration; a Model Runner built on FastAPI and LiteLLM as a unified multi provider proxy; an Eval Engine for automated metric scoring; and MongoDB for metadata persistence.',
@@ -291,6 +376,10 @@ export const profile = {
         name: 'Aura.ai',
         tagline: 'Text goes in. A narrated, signed, AR ready video comes out.',
         year: '2024',
+        stats: [
+          { value: '3', label: 'Output modes per upload' },
+          { value: '1', label: 'Grounded assistant on top' },
+        ],
         stack: ['RAG', 'Multilingual TTS', 'AR / VR', 'Analytics'],
         points: [
           'Built an AI SaaS platform that automates end to end video creation from text and document input, covering content summarisation, multilingual voiceover synthesis, sign language video generation and AR/VR scene integration, aimed at accessibility in education and corporate training.',
@@ -377,7 +466,7 @@ export const profile = {
       {
         place: 'Selected',
         event: 'GitHub Field Day’24',
-        detail: 'Microsoft, Gurgaon',
+        detail: 'Hosted by Microsoft',
         logo: '/logos/github.svg',
       },
       {
@@ -400,34 +489,20 @@ export const profile = {
     degree: 'Bachelor of Computer Applications',
     field: 'Information Technology',
     institution: 'Chitkara University',
-    location: 'Punjab, India',
   },
 
   writing: {
     eyebrow: 'Technical blogs',
-    title: 'Deep dives, _dropping soon_',
-    badge: 'Dropping soon',
-    heading: 'The first technical blogs are in draft',
-    body:
-      'Latency budgets, privacy layers, provider routing and the engineering decisions that only surface once a system is live. Architecture, trade offs and numbers, not summaries.',
-    topics: [
-      { title: 'Why the turn budget comes before the model', tag: 'Voice AI' },
-      { title: 'Zero leak prompting with reversible PII masking', tag: 'Privacy' },
-      { title: 'Scoring output you cannot eyeball', tag: 'Evaluation' },
-    ],
-    page: {
-      title: 'Technical blogs on _applied_ AI',
-      lede:
-        'Deep technical writing on real time voice systems, agentic pipelines and LLM evaluation. Every one is something I built, taken apart and explained.',
-      empty: 'Nothing published yet, and that is deliberate.',
-    },
+    title: '_Cooking_.',
+    badge: 'In the oven',
+    line: 'Deep dives on voice, agents and evaluation. First one served soon.',
   },
 
   contact: {
     eyebrow: 'Contact',
     title: 'Got something that should _talk back_?',
     body:
-      'Open to work on real time voice, agentic systems and LLM platform engineering. Email lands fastest, and I reply to all of it.',
+      'Voice, agents, evaluation, or a product that needs building. Email lands fastest, and I reply to all of it.',
   },
 };
 

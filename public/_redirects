@@ -1,0 +1,2 @@
+# Netlify and Cloudflare Pages: serve the app for any path the build did not prerender
+/*  /index.html  200

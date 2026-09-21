@@ -7,9 +7,9 @@ import { Sun, Moon } from './Icons.jsx';
 const SECTIONS = [
   { id: 'numbers', label: 'Impact' },
   { id: 'about', label: 'About' },
+  { id: 'building', label: 'Building' },
   { id: 'work', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'stack', label: 'Stack' },
+  { id: 'projects', label: 'Work' },
 ];
 
 export default function Nav({ page }) {
@@ -60,11 +60,19 @@ export default function Nav({ page }) {
       <header className={`nav${stuck ? ' is-stuck' : ''}`}>
         <div className="shell">
           <div className="nav-inner">
-            <button className="brand" onClick={goHome} aria-label="Back to top">
+            <a
+              className="brand"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                goHome();
+              }}
+              aria-label="Back to top"
+            >
               <i aria-hidden="true">[</i>
               {profile.name}
               <i aria-hidden="true">]</i>
-            </button>
+            </a>
 
             <nav className="nav-links" aria-label="Sections">
               {SECTIONS.map((item) => (
@@ -72,15 +80,17 @@ export default function Nav({ page }) {
                   {item.label}
                 </button>
               ))}
-              <button
+              <a
                 className={`nav-link${page !== 'home' ? ' is-active' : ''}`}
-                onClick={() => {
+                href="/blog"
+                onClick={(e) => {
+                  e.preventDefault();
                   setOpen(false);
                   navigate('/blog');
                 }}
               >
                 Blog
-              </button>
+              </a>
             </nav>
 
             <div className="nav-actions">
@@ -125,7 +135,7 @@ export default function Nav({ page }) {
             </a>
           ))}
           <a
-            href="#/blog"
+            href="/blog"
             onClick={(e) => {
               e.preventDefault();
               setOpen(false);
@@ -144,7 +154,7 @@ export default function Nav({ page }) {
             <span>PDF</span>
           </a>
         </nav>
-        <p className="drawer-meta">{profile.location}</p>
+        <p className="drawer-meta">{profile.role}</p>
       </div>
     </>
   );

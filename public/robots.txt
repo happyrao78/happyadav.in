@@ -1,0 +1,31 @@
+# https://happyadav.in
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# Explicitly welcome the crawlers that matter for previews and AI search
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: https://happyadav.in/sitemap.xml
