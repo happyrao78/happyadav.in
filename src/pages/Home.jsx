@@ -8,7 +8,6 @@ import Experience from '../components/Experience.jsx';
 import Projects from '../components/Projects.jsx';
 import Stack from '../components/Stack.jsx';
 import Recognition from '../components/Recognition.jsx';
-import Writing from '../components/Writing.jsx';
 import Contact from '../components/Contact.jsx';
 
 export default function Home() {
@@ -24,7 +23,6 @@ export default function Home() {
       <Projects />
       <Stack />
       <Recognition />
-      <Writing />
       <Contact />
     </>
   );

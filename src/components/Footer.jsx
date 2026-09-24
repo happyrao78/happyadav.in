@@ -23,7 +23,6 @@ export default function Footer() {
               {item.label}
             </a>
           ))}
-          <a href={`mailto:${profile.email}`}>Email</a>
         </p>
       </div>
     </footer>
