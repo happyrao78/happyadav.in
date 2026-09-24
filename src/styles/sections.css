@@ -9,6 +9,25 @@
   overflow: hidden;
 }
 
+@media (max-width: 640px) {
+  .hero {
+    padding-top: calc(6.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  /* Buys back vertical room for the taller stacked wordmark */
+  .hero-main {
+    padding-block: 1rem;
+  }
+
+  .hero-grid {
+    gap: 2rem;
+  }
+
+  .strip > * {
+    padding-block: 0.7rem;
+  }
+}
+
 .hero-main {
   flex: 1;
   display: flex;
@@ -114,6 +133,21 @@
 
 .wordmark-dim {
   fill: var(--ink-faint);
+}
+
+/* One line is the default; the stacked mark only appears on narrow screens. */
+.wordmark--stack {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .wordmark--line {
+    display: none;
+  }
+
+  .wordmark--stack {
+    display: block;
+  }
 }
 
 /* ---------- Logo strip ---------- */

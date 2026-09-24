@@ -53,24 +53,45 @@ export default function Hero() {
           </div>
         </div>
         <div className="shell">
-          {/* Sized by viewBox so the wordmark always spans the shell exactly, at any width. */}
+          {/*
+            Both marks are sized by their viewBox, so each spans the shell exactly
+            at any width. On one line a phone would squeeze the name down to a
+            ~40px sliver, so below 640px the stacked mark takes over and each word
+            gets the full width instead.
+          */}
           <svg
-            className="wordmark"
+            className="wordmark wordmark--line"
             viewBox="0 0 1200 142"
             preserveAspectRatio="xMidYMax meet"
-            role="img"
-            aria-label={profile.name}
+            aria-hidden="true"
+            focusable="false"
           >
-            <text
-              x="0"
-              y="136"
-              textLength="1200"
-              lengthAdjust="spacing"
-              fontSize="186"
-              fontWeight="600"
-            >
+            <text x="0" y="136" textLength="1200" lengthAdjust="spacing" fontSize="186" fontWeight="600">
               {wordmark[0]}
               <tspan className="wordmark-dim">{wordmark[1]}</tspan>
+            </text>
+          </svg>
+
+          <svg
+            className="wordmark wordmark--stack"
+            viewBox="0 0 1200 540"
+            preserveAspectRatio="xMidYMax meet"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <text x="0" y="263" textLength="1200" lengthAdjust="spacing" fontSize="360" fontWeight="600">
+              {wordmark[0]}
+            </text>
+            <text
+              x="0"
+              y="535"
+              textLength="1200"
+              lengthAdjust="spacing"
+              fontSize="360"
+              fontWeight="600"
+              className="wordmark-dim"
+            >
+              {wordmark[1]}
             </text>
           </svg>
         </div>
