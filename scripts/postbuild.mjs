@@ -9,6 +9,8 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import profile from '../src/content/profile.js';
+import { buildLlms } from './llms.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -61,12 +63,14 @@ function frontmatter(raw) {
 const posts = (existsSync(postsDir) ? readdirSync(postsDir) : [])
   .filter((file) => file.endsWith('.md'))
   .map((file) => {
-    const data = frontmatter(readFileSync(join(postsDir, file), 'utf8'));
+    const raw = readFileSync(join(postsDir, file), 'utf8');
+    const data = frontmatter(raw);
     return {
       slug: data.slug || file.replace(/\.md$/, ''),
       title: data.title || file.replace(/\.md$/, ''),
       description: data.summary || '',
       date: data.date || '',
+      body: raw.replace(/^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n?/, ''),
     };
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -136,6 +140,10 @@ ${routes
 `;
 writeFileSync(join(dist, 'sitemap.xml'), sitemap);
 
+const { llms, full } = buildLlms({ profile, posts, site: SITE });
+writeFileSync(join(dist, 'llms.txt'), llms);
+writeFileSync(join(dist, 'llms-full.txt'), full);
+
 console.log(
-  `seo: ${routes.length} route${routes.length === 1 ? '' : 's'} prerendered, sitemap.xml and 404.html written`,
+  `seo: ${routes.length} route${routes.length === 1 ? '' : 's'} prerendered, sitemap.xml, llms.txt, llms-full.txt and 404.html written`,
 );
