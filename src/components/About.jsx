@@ -1,5 +1,6 @@
 import profile from '../content/profile.js';
 import SectionHead from './SectionHead.jsx';
+import { ArrowUpRight } from './Icons.jsx';
 
 export default function About() {
   const { about } = profile;
@@ -23,7 +24,15 @@ export default function About() {
               {about.facts.map((fact) => (
                 <div key={fact.label}>
                   <dt>{fact.label}</dt>
-                  <dd>{fact.value}</dd>
+                  <dd>
+                    {fact.value}
+                    {fact.href ? (
+                      <a className="about-link link" href={fact.href} target="_blank" rel="me noopener noreferrer">
+                        {fact.linkLabel}
+                        <ArrowUpRight />
+                      </a>
+                    ) : null}
+                  </dd>
                 </div>
               ))}
             </dl>

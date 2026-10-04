@@ -2,3 +2,6 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Resume stays private: never commit or publish it
+*.pdf

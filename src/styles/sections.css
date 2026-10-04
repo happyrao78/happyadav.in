@@ -58,7 +58,10 @@
 }
 
 .hero-title em {
-  font-style: normal;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--teal);
 }
 
@@ -92,6 +95,14 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1.75rem;
+}
+
+/* Two long labels do not fit side by side on a phone, so they stack evenly */
+@media (max-width: 480px) {
+  .hero-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
 }
 
 .hero-grid {
@@ -189,27 +200,27 @@
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  opacity: 0.6;
-  transition: opacity 0.4s var(--ease);
-}
-
-.logo-item:hover {
-  opacity: 1;
-}
-
-.logo-item img {
-  filter: var(--logo-filter);
-  transition: filter 0.4s var(--ease);
-}
-
-.logo-item:hover img {
-  filter: var(--logo-filter-hover);
 }
 
 .logo-item img {
   width: 1.65rem;
   height: 1.65rem;
   object-fit: contain;
+  padding: var(--logo-tile-pad);
+  border-radius: 0.4rem;
+  background: var(--logo-tile);
+  transition: transform 0.4s var(--ease);
+}
+
+.logo-item:hover img {
+  transform: translateY(-2px);
+}
+
+/* A full wordmark carries the name itself, so it gets width instead of a label */
+.logo-item--wordmark img {
+  width: auto;
+  height: 2.35rem;
+  padding: var(--logo-tile-pad) calc(var(--logo-tile-pad) * 2);
 }
 
 .logo-item span {
@@ -218,6 +229,11 @@
   letter-spacing: -0.01em;
   color: var(--ink-2);
   white-space: nowrap;
+  transition: color 0.4s var(--ease);
+}
+
+.logo-item:hover span {
+  color: var(--ink);
 }
 
 /* ---------- Metrics ---------- */
@@ -340,6 +356,14 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-faint);
+}
+
+.about-link {
+  display: flex;
+  width: fit-content;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  color: var(--teal-ink);
 }
 
 .about-card dd {
@@ -678,6 +702,35 @@
   font-weight: 500;
 }
 
+.project-link {
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  color: var(--ink-2);
+}
+
+.project-link:hover {
+  color: var(--teal);
+}
+
+.project-body {
+  display: grid;
+  gap: 1.6rem;
+  align-content: start;
+}
+
+.project-label {
+  margin-bottom: 0.7rem;
+  color: var(--ink-faint);
+}
+
+.project-problem {
+  color: var(--ink);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  max-width: 46rem;
+}
+
 @media (min-width: 960px) {
   .project {
     grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.6fr);
@@ -826,7 +879,10 @@
 }
 
 .contact-title em {
-  font-style: normal;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--teal);
 }
 
@@ -845,13 +901,6 @@
   font-weight: 600;
   letter-spacing: -0.04em;
   word-break: break-word;
-}
-
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: clamp(2.25rem, 4.5vw, 3.25rem);
 }
 
 .footer {
@@ -928,94 +977,6 @@
 
   .stat-row > div:last-child:nth-child(odd) {
     grid-column: 1 / -1;
-  }
-}
-
-/* ---------- Ventures ---------- */
-
-.ventures {
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  overflow: hidden;
-}
-
-.venture {
-  background: var(--paper-3);
-  padding: clamp(1.5rem, 3vw, 2.35rem);
-  display: grid;
-  gap: 1rem;
-  align-content: start;
-  transition: background 0.4s var(--ease);
-}
-
-.venture:hover {
-  background: var(--paper-2);
-}
-
-.venture-head {
-  display: grid;
-  gap: 0.5rem;
-  justify-items: start;
-}
-
-.venture-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.28rem 0.7rem;
-  border-radius: var(--r-full);
-  background: var(--teal-soft);
-  color: var(--teal-ink);
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.venture-status i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: blip 2.2s var(--ease) infinite;
-}
-
-.venture-name {
-  font-size: var(--t-h3);
-  font-weight: 600;
-}
-
-.venture-domain {
-  font-family: var(--font-mono);
-  font-size: var(--t-small);
-  color: var(--ink-soft);
-}
-
-.venture-domain:hover {
-  color: var(--teal);
-}
-
-.venture-punch {
-  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.3;
-  max-width: 30ch;
-}
-
-.venture-body {
-  color: var(--ink-soft);
-  font-size: var(--t-small);
-  line-height: 1.6;
-  max-width: 50ch;
-}
-
-@media (min-width: 820px) {
-  .ventures {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

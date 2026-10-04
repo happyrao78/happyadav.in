@@ -20,5 +20,9 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
   ],
+  "redirects": [
+    { "source": "/blog", "destination": "/readings", "permanent": true },
+    { "source": "/blog/:slug", "destination": "/readings/:slug", "permanent": true }
+  ],
   "rewrites": [{ "source": "/((?!assets/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }]
 }

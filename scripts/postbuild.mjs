@@ -70,6 +70,9 @@ const posts = (existsSync(postsDir) ? readdirSync(postsDir) : [])
       title: data.title || file.replace(/\.md$/, ''),
       description: data.summary || '',
       date: data.date || '',
+      updated: data.updated || '',
+      source: data.source || '',
+      sourceName: data.sourceName || '',
       body: raw.replace(/^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n?/, ''),
     };
   })
@@ -90,23 +93,21 @@ const routes = [
     lastmod: today,
   },
   {
-    path: '/blog',
-    title: `Technical blogs | ${NAME}`,
-    description:
-      'Technical deep dives on real time voice systems, agentic pipelines and LLM evaluation, written from what actually shipped.',
+    path: '/readings',
+    ...profile.seo.routes['/readings'],
     type: 'website',
     priority: '0.8',
     changefreq: 'weekly',
     lastmod: posts[0]?.date || today,
   },
   ...posts.map((post) => ({
-    path: `/blog/${post.slug}`,
+    path: `/readings/${post.slug}`,
     title: `${post.title} | ${NAME}`,
     description: post.description,
     type: 'article',
     priority: '0.7',
     changefreq: 'yearly',
-    lastmod: post.date || today,
+    lastmod: post.updated || post.date || today,
   })),
 ];
 

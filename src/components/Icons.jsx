@@ -49,3 +49,19 @@ export function Moon() {
     </svg>
   );
 }
+
+export function ArrowUp() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M7 12V2M2.5 6.5 7 2l4.5 4.5" stroke="currentColor" strokeWidth="1.3" />
+    </svg>
+  );
+}
+
+export function ArrowDown() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M7 2v10M2.5 7.5 7 12l4.5-4.5" stroke="currentColor" strokeWidth="1.3" />
+    </svg>
+  );
+}

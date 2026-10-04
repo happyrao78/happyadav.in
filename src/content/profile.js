@@ -12,14 +12,15 @@ export const profile = {
   wordmark: ['HAPPY', 'YADAV'],
   role: 'Applied AI Engineer',
   email: 'happy.yadav.ai@gmail.com',
-  phone: '+91 85958 64036',
-  resume: '/Happy_Yadav_AI_Engineer.pdf',
+  booking: 'https://topmate.io/happy_yadav10',
 
   links: {
     github: 'https://github.com/happyrao78',
     linkedin: 'https://www.linkedin.com/in/happy-yadav-16b2a4287',
     x: 'https://x.com/rao_happyy',
     reddit: 'https://www.reddit.com/user/happy_yadav',
+    topmate: 'https://topmate.io/happy_yadav10',
+    instagram: 'https://instagram.com/raohappyyy',
   },
 
   handles: {
@@ -27,6 +28,8 @@ export const profile = {
     linkedin: 'happy-yadav',
     x: 'rao_happyy',
     reddit: 'u/happy_yadav',
+    topmate: 'happy_yadav10',
+    instagram: '@raohappyyy',
   },
 
   seo: {
@@ -44,10 +47,10 @@ export const profile = {
         description:
           'Applied AI Engineer building real time voice agents, multi channel chat systems and LLM evaluation platforms. Live in production across phone, web and WhatsApp.',
       },
-      '/blog': {
-        title: 'Technical blogs | Happy Yadav',
+      '/readings': {
+        title: 'Readings | Happy Yadav',
         description:
-          'Technical deep dives on real time voice systems, agentic pipelines and LLM evaluation, written from what actually shipped.',
+          'Readings on real time voice systems, agentic pipelines and LLM evaluation, each linked back to the source it came from.',
       },
     },
   },
@@ -55,11 +58,12 @@ export const profile = {
   hero: {
     eyebrow: 'Applied AI Engineer',
     headline: ['Applied AI that', '_holds up_.'],
+    cta: { primary: 'See the work', booking: 'Book a 1:1 session' },
     lede:
       'Voice agents that answer before you finish the question. Chat that remembers three messages back. And the harnesses that prove both actually work. *All of it live today.*',
     strip: [
       { label: 'Currently', value: 'EaseMyTrip' },
-      { label: 'Also building', value: 'RentaLease, Placeholder' },
+      { label: 'Off the clock', value: 'Lifestyle and fashion content' },
       { label: 'Focus', value: 'Voice, chat, multimodal' },
       { label: 'Scroll', value: 'To explore' },
     ],
@@ -68,7 +72,7 @@ export const profile = {
   logos: {
     label: 'Shipped for, backed by and recognised at',
     items: [
-      { name: 'EaseMyTrip', src: '/logos/easemytrip.png' },
+      { name: 'EaseMyTrip', src: '/logos/easemytrip-wordmark.svg', wordmark: true },
       { name: 'Hunar.ai', src: '/logos/hunar.png' },
       { name: 'Chitkara University', src: '/logos/chitkara.png' },
       { name: 'Bajaj Finserv', src: '/logos/bajaj.png' },
@@ -96,8 +100,8 @@ export const profile = {
       {
         to: 20,
         suffix: '+',
-        label: 'Clients served',
-        line: 'Businesses that kept the systems running long after I handed them over.',
+        label: 'Enterprise clients served',
+        line: 'Enterprise clients whose reporting runs on data pipelines I built and tuned.',
       },
       {
         to: 30,
@@ -121,12 +125,19 @@ export const profile = {
       'Most AI demos work once. Mine has to work on the thousandth call, at 2am, when a provider is timing out and the caller is standing next to a highway.',
       'That gap is where I spend my time: latency budgets, graceful degradation, privacy layers, evaluation harnesses, and the small conversational details that decide whether someone believes they are talking to a person.',
       'I work across the stack, Python and FastAPI on the backend, React on the front, containerised and instrumented so the thing that ships is the thing you can actually debug.',
+      'Away from the keyboard I am a content creator, making content around lifestyle, my hobbies and fashion.',
     ],
     facts: [
       { label: 'Languages shipped', value: 'Hindi and English, in the same live agent' },
       { label: 'Deepest work', value: 'Real time audio, agentic graphs, LLM evaluation' },
       { label: 'Reply time', value: 'Same day, usually sooner' },
       { label: 'Open to', value: 'Voice AI and agentic platform engineering' },
+      {
+        label: 'Beyond tech',
+        value: 'Content creator: lifestyle, hobbies and fashion',
+        href: 'https://instagram.com/raohappyyy',
+        linkLabel: '@raohappyyy on Instagram',
+      },
     ],
   },
 
@@ -165,34 +176,6 @@ export const profile = {
     ],
   },
 
-  ventures: {
-    eyebrow: 'Building now',
-    title: 'Two products, _in build_',
-    note: 'Side by side with my og team, shipped the same way as everything else.',
-    items: [
-      {
-        name: 'RentaLease',
-        domain: 'rentalease.in',
-        url: 'https://www.rentalease.in/',
-        status: 'In build',
-        punch: 'Zero brokerage. See what your neighbours actually pay.',
-        body:
-          'A rent map built on real numbers instead of listings. Renters post what they pay anonymously, browse what everyone around them pays, find flatmates and reach owners directly. No brokers in the middle, no signup wall, free to use.',
-        tags: ['Marketplace', 'Zero brokerage', 'Community data'],
-      },
-      {
-        name: 'Placeholder',
-        domain: 'placeholderworks.com',
-        url: 'https://placeholderworks.com/',
-        status: 'In build',
-        punch: 'AI engineering and implementation. Shipped, not scoped.',
-        body:
-          'A studio that builds the systems we have already run in production: voice agents, retrieval grounded assistants and agentic automation, delivered as working software with instrumentation and a handover, rather than a deck.',
-        tags: ['AI studio', 'Voice and agents', 'Implementation'],
-      },
-    ],
-  },
-
   experience: {
     eyebrow: 'Experience',
     title: 'Where the work actually runs',
@@ -200,7 +183,7 @@ export const profile = {
     roles: [
       {
         company: 'EaseMyTrip.com',
-        logo: '/logos/easemytrip.png',
+        logo: '/logos/easemytrip.svg',
         title: 'Applied AI Engineer',
         period: 'Aug 2025 to Present',
         current: true,
@@ -293,20 +276,6 @@ export const profile = {
         ],
       },
       {
-        company: 'Independent',
-        title: 'Freelance AI Engineer',
-        period: '2024 to Present',
-        current: true,
-        summary:
-          'Selected engagements for teams that need a voice agent, an assistant or an automation working in front of customers, not sitting in a notebook.',
-        points: [
-          'Design and ship end to end voice agents across telephony and browser transports: streaming speech to text, turn detection, model reasoning and synthesis, tuned against a latency budget agreed before a line of code is written.',
-          'Build retrieval grounded chat assistants over client knowledge bases and documents, with persistent session context, channel aware prompting and tool calling into the systems a business already runs on.',
-          'Deliver agentic automation and integrations, including MCP tool servers, multi step workflows and API pipelines that take a manual internal process and make it a background job.',
-          'Work as an embedded engineer rather than a vendor: scoped deliverables, containerised handover, instrumentation from day one, and documentation the in house team can maintain after I step off.',
-        ],
-      },
-      {
         company: 'Hunar.ai',
         logo: '/logos/hunar.png',
         title: 'Backend Developer Intern',
@@ -335,12 +304,30 @@ export const profile = {
 
   projects: {
     eyebrow: 'Selected work',
-    title: 'Built on my own time, and still running',
+    title: 'Real problems, _real builds_',
+    note: 'Each one starts with the problem it had to solve, then what I built for it.',
     items: [
+      {
+        name: 'RentaLease',
+        tagline: 'Zero brokerage. See what your neighbours actually pay.',
+        year: 'In build',
+        url: 'https://www.rentalease.in/',
+        domain: 'rentalease.in',
+        stack: ['Marketplace', 'Zero brokerage', 'Community data'],
+        problem:
+          'Renters negotiate blind. Listings show what owners are asking, not what people around them actually pay, and brokers sit between tenant and owner taking a cut for an introduction. Finding a flatmate or reaching an owner directly means going through the same middlemen.',
+        points: [
+          'Built a rent map on real numbers instead of listings: renters post what they pay anonymously and browse what everyone around them pays, so a fair rent is something you can look up rather than guess.',
+          'Added flatmate discovery and direct owner contact, taking the broker out of the middle entirely with zero brokerage on any deal.',
+          'Kept it open: no signup wall to browse and free to use, so the data grows from the community that relies on it.',
+        ],
+      },
       {
         name: 'ComplaintHub',
         tagline: 'File a complaint by talking. Nobody has to pick up.',
         year: '2025',
+        problem:
+          'Registering a citizen complaint by phone means waiting in a queue for a human agent who then types the details into a form by hand. The line is only as available as the people staffing it, and noisy calls make the details harder still to capture correctly.',
         stats: [
           { value: '3', label: 'Voice pipelines benchmarked' },
           { value: '0', label: 'Human agents in the loop' },
@@ -355,9 +342,11 @@ export const profile = {
         ],
       },
       {
-        name: 'Syntropy Labs',
+        name: 'Evaluation Labs',
         tagline: 'Four services that decide whether your model is actually any good.',
         year: '2025',
+        problem:
+          'Teams shipping on LLMs had no single place to compare providers, score outputs against their own criteria, or benchmark live voice and generated image and video. Model choices came down to gut feel and a handful of hand checked samples.',
         stats: [
           { value: '4', label: 'Containerised services' },
           { value: '5', label: 'Providers behind one API' },
@@ -376,6 +365,8 @@ export const profile = {
         name: 'Aura.ai',
         tagline: 'Text goes in. A narrated, signed, AR ready video comes out.',
         year: '2024',
+        problem:
+          'Turning course and training material into accessible video, with narration in several languages, sign language and immersive formats, is slow manual production work. Most material never gets an accessible version, and there is little signal on whether learners actually understood it.',
         stats: [
           { value: '3', label: 'Output modes per upload' },
           { value: '1', label: 'Grounded assistant on top' },
@@ -491,11 +482,14 @@ export const profile = {
     institution: 'Chitkara University',
   },
 
-  writing: {
-    eyebrow: 'Technical blogs',
-    title: '_Cooking_.',
-    badge: 'In the oven',
-    line: 'Deep dives on voice, agents and evaluation. First one served soon.',
+  readings: {
+    eyebrow: 'Readings',
+    title: 'Worth _reading_',
+    pageTitle: 'Readings on _applied_ AI',
+    note: 'What I am reading across voice, agents and evaluation, with my take and a link back to the source.',
+    badge: 'First one soon',
+    line: 'Notes on voice, agents and evaluation. The first reading lands soon.',
+    all: 'All readings',
   },
 
   contact: {

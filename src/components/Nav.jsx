@@ -7,7 +7,6 @@ import { Sun, Moon } from './Icons.jsx';
 const SECTIONS = [
   { id: 'numbers', label: 'Impact' },
   { id: 'about', label: 'About' },
-  { id: 'building', label: 'Building' },
   { id: 'work', label: 'Experience' },
   { id: 'projects', label: 'Work' },
 ];
@@ -82,14 +81,14 @@ export default function Nav({ page }) {
               ))}
               <a
                 className={`nav-link${page !== 'home' ? ' is-active' : ''}`}
-                href="/blog"
+                href="/readings"
                 onClick={(e) => {
                   e.preventDefault();
                   setOpen(false);
-                  navigate('/blog');
+                  navigate('/readings');
                 }}
               >
-                Blog
+                Readings
               </a>
             </nav>
 
@@ -135,23 +134,19 @@ export default function Nav({ page }) {
             </a>
           ))}
           <a
-            href="/blog"
+            href="/readings"
             onClick={(e) => {
               e.preventDefault();
               setOpen(false);
-              navigate('/blog');
+              navigate('/readings');
             }}
           >
-            Blog
-            <span>06</span>
+            Readings
+            <span>{String(SECTIONS.length + 1).padStart(2, '0')}</span>
           </a>
           <a href={`mailto:${profile.email}`} onClick={() => setOpen(false)}>
             Contact
-            <span>07</span>
-          </a>
-          <a href={profile.resume} onClick={() => setOpen(false)}>
-            Resume
-            <span>PDF</span>
+            <span>{String(SECTIONS.length + 2).padStart(2, '0')}</span>
           </a>
         </nav>
         <p className="drawer-meta">{profile.role}</p>

@@ -11,9 +11,16 @@ export default function LogoStrip() {
         </div>
         <div className="logos-row" data-reveal style={{ '--i': 1 }}>
           {logos.items.map((item) => (
-            <span className="logo-item" key={item.name}>
-              <img src={item.src} alt="" aria-hidden="true" loading="lazy" />
-              <span>{item.name}</span>
+            <span className={`logo-item${item.wordmark ? ' logo-item--wordmark' : ''}`} key={item.name}>
+              {item.wordmark ? (
+                // The wordmark already spells the name, so it stands alone
+                <img src={item.src} alt={item.name} loading="lazy" />
+              ) : (
+                <>
+                  <img src={item.src} alt="" aria-hidden="true" loading="lazy" />
+                  <span>{item.name}</span>
+                </>
+              )}
             </span>
           ))}
         </div>

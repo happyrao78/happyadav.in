@@ -13,12 +13,17 @@ function readRoute() {
   return normalise(window.location.pathname);
 }
 
-/** Rewrites a legacy `#/blog` link to `/blog` once, before the app renders. */
-export function upgradeLegacyHash() {
-  const { hash, search } = window.location;
-  if (!hash.startsWith('#/')) return;
-  const path = normalise(hash.slice(1));
-  window.history.replaceState(null, '', path + search);
+/**
+ * Upgrades old links once, before the app renders: a `#/blog` hash link becomes
+ * a real path, and anything under `/blog` moves to `/readings`.
+ */
+export function upgradeLegacyLinks() {
+  const { hash, search, pathname } = window.location;
+  let path = hash.startsWith('#/') ? normalise(hash.slice(1)) : normalise(pathname);
+  if (path === '/blog' || path.startsWith('/blog/')) path = `/readings${path.slice('/blog'.length)}`;
+  if (path !== normalise(pathname) || hash.startsWith('#/')) {
+    window.history.replaceState(null, '', path + search + (hash.startsWith('#/') ? '' : hash));
+  }
 }
 
 export function useRoute() {
@@ -45,9 +50,9 @@ export function navigate(path) {
 }
 
 export function matchRoute(route) {
-  if (route === '/blog') return { page: 'blog' };
-  if (route.startsWith('/blog/')) {
-    const slug = decodeURIComponent(route.slice('/blog/'.length));
+  if (route === '/readings') return { page: 'readings' };
+  if (route.startsWith('/readings/')) {
+    const slug = decodeURIComponent(route.slice('/readings/'.length));
     if (slug) return { page: 'post', slug };
   }
   return { page: 'home' };

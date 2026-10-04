@@ -7,6 +7,8 @@ export default function Footer() {
     { label: 'X', href: links.x },
     { label: 'LinkedIn', href: links.linkedin },
     { label: 'GitHub', href: links.github },
+    { label: 'Instagram', href: links.instagram },
+    { label: 'Topmate', href: links.topmate },
     { label: 'Reddit', href: links.reddit },
   ];
 

@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
-import { posts, allTags, formatDate } from '../content/posts.js';
-import { navigate } from '../lib/router.js';
+import { posts, allTags } from '../content/posts.js';
 import profile from '../content/profile.js';
 import { Emphasis } from '../components/SectionHead.jsx';
-import { SearchIcon, Arrow } from '../components/Icons.jsx';
+import PostCard from '../components/PostCard.jsx';
+import { SearchIcon } from '../components/Icons.jsx';
 
-export default function BlogIndex() {
-  const { writing } = profile;
+export default function ReadingsIndex() {
+  const { readings } = profile;
   const [query, setQuery] = useState('');
   const [tag, setTag] = useState('All');
 
@@ -20,31 +20,37 @@ export default function BlogIndex() {
         post.title.toLowerCase().includes(q) ||
         post.summary.toLowerCase().includes(q) ||
         post.tags.join(' ').toLowerCase().includes(q) ||
+        post.sourceName.toLowerCase().includes(q) ||
         post.body.toLowerCase().includes(q)
       );
     });
   }, [query, tag]);
+
+  // The newest reading leads the grid only on the unfiltered view
+  const showLead = tag === 'All' && !query;
 
   return (
     <div className="page">
       <div className="shell">
         <header className="page-head">
           <p className="eyebrow" data-reveal>
-            {writing.eyebrow}
+            {readings.eyebrow}
           </p>
           <h1 className="page-title" data-reveal style={{ '--i': 1 }}>
-            <Emphasis text={posts.length ? 'Technical blogs on _applied_ AI' : writing.title} />
+            <Emphasis text={readings.pageTitle} />
           </h1>
-
+          <p className="page-lede" data-reveal style={{ '--i': 2 }}>
+            {readings.note}
+          </p>
         </header>
 
         {posts.length === 0 ? (
           <div className="soon" data-reveal>
             <span className="soon-badge">
               <i aria-hidden="true" />
-              {writing.badge}
+              {readings.badge}
             </span>
-            <p className="soon-line">{writing.line}</p>
+            <p className="soon-line">{readings.line}</p>
           </div>
         ) : (
           <>
@@ -55,8 +61,8 @@ export default function BlogIndex() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search blogs"
-                  aria-label="Search blogs"
+                  placeholder="Search readings"
+                  aria-label="Search readings"
                 />
               </label>
 
@@ -74,40 +80,13 @@ export default function BlogIndex() {
             </div>
 
             {visible.length ? (
-              <div className="post-grid">
+              <div className={`post-grid${showLead ? ' has-lead' : ''}`}>
                 {visible.map((post, i) => (
-                  <a
-                    className={`post-card${i === 0 && tag === 'All' && !query ? ' post-card--lead' : ''}`}
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate(`/blog/${post.slug}`);
-                    }}
-                    data-reveal
-                    style={{ '--i': Math.min(i, 4) }}
-                  >
-                    <p className="post-meta">
-                      <span>{formatDate(post.date)}</span>
-                      <span>{post.minutes} min read</span>
-                    </p>
-                    <h2 className="post-card-title">{post.title}</h2>
-                    <p className="post-card-summary">{post.summary}</p>
-                    <div className="tags">
-                      {post.tags.map((t) => (
-                        <span className="tag" key={t}>
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="post-card-go">
-                      Read <Arrow />
-                    </p>
-                  </a>
+                  <PostCard post={post} index={i} lead={showLead && i === 0} key={post.slug} />
                 ))}
               </div>
             ) : (
-              <p className="empty">No blogs match that search yet.</p>
+              <p className="empty">No readings match that search yet.</p>
             )}
           </>
         )}

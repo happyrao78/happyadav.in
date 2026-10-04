@@ -1,10 +1,22 @@
 import { parseFrontmatter, readingTime } from '../lib/markdown.jsx';
 
 /**
- * Drop a new `.md` file into src/content/posts/ and it appears on the blog.
- * Frontmatter keys: title, date (YYYY-MM-DD), summary, tags [a, b], featured, slug.
+ * Drop a new `.md` file into src/content/posts/ and it appears under Readings.
+ * Frontmatter keys: title, date (YYYY-MM-DD), summary, tags [a, b], featured, slug,
+ * source (the URL it came from), sourceName (optional label), citation (optional
+ * full reference), updated (YYYY-MM-DD).
  */
 const files = import.meta.glob('./posts/*.md', { query: '?raw', import: 'default', eager: true });
+
+/** "https://www.example.com/a/b" becomes "example.com". */
+export function sourceHost(url) {
+  if (!url) return '';
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
 
 function slugFromPath(path) {
   return path.split('/').pop().replace(/\.md$/, '');
@@ -18,6 +30,10 @@ export const posts = Object.entries(files)
       title: data.title || slugFromPath(path),
       date: data.date || '',
       summary: data.summary || '',
+      updated: data.updated || '',
+      source: data.source || '',
+      sourceName: data.sourceName || sourceHost(data.source),
+      citation: data.citation || '',
       tags: Array.isArray(data.tags) ? data.tags : [],
       featured: Boolean(data.featured),
       minutes: readingTime(body),

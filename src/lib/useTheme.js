@@ -27,7 +27,7 @@ export function useTheme() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0e0e0f' : '#fafaf7');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0b0e12' : '#f6f7f9');
   }, [theme]);
 
   // Keep following the OS while no explicit choice has been made.

@@ -1,10 +1,19 @@
+import Term from '../components/Term.jsx';
+
 /**
  * A small, dependency-free Markdown subset renderer.
  * Supports: frontmatter, headings, paragraphs, lists, blockquotes,
  * fenced code, images, horizontal rules, and inline bold / italic / code / links.
+ *
+ * Highlighted terms: write ==Kafka== in the text and define it once on its own
+ * line as `*[Kafka]: A distributed event streaming platform.` The term renders
+ * highlighted and shows that definition on hover, focus or tap. Use
+ * ==Kafka's|Kafka== when the text differs from the glossary entry.
  */
 
-const INLINE = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*\n]+\*|_[^_\n]+_|!\[[^\]]*\]\([^)]+\)|\[[^\]]+\]\([^)]+\))/g;
+const GLOSSARY_LINE = /^\*\[([^\]]+)\]:\s*(.+)$/;
+
+const INLINE = /(==[^=\n]+==|`[^`]+`|\*\*[^*]+\*\*|\*[^*\n]+\*|_[^_\n]+_|!\[[^\]]*\]\([^)]+\)|\[[^\]]+\]\([^)]+\))/g;
 
 export function parseFrontmatter(raw) {
   const text = raw.replace(/^﻿/, '');
@@ -34,11 +43,34 @@ export function parseFrontmatter(raw) {
   return { data, body: text.slice(match[0].length).trim() };
 }
 
-function inline(text, keyBase) {
+/** Pulls the `*[Term]: definition` lines out of a body. Keys are lower case. */
+export function parseGlossary(body) {
+  const glossary = new Map();
+  const rest = [];
+  String(body)
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .forEach((line) => {
+      const entry = GLOSSARY_LINE.exec(line.trim());
+      if (entry) glossary.set(entry[1].trim().toLowerCase(), { term: entry[1].trim(), definition: entry[2].trim() });
+      else rest.push(line);
+    });
+  return { glossary, body: rest.join('\n') };
+}
+
+function inlineWith(text, keyBase, glossary = new Map()) {
   const parts = String(text).split(INLINE).filter((part) => part !== '' && part !== undefined);
 
   return parts.map((part, i) => {
     const key = `${keyBase}-${i}`;
+
+    const term = /^==([^=|\n]+)(?:\|([^=\n]+))?==$/.exec(part);
+    if (term) {
+      const label = term[1].trim();
+      const entry = glossary.get((term[2] || label).trim().toLowerCase());
+      if (!entry) return <mark key={key}>{label}</mark>;
+      return <Term key={key} label={label} title={entry.term} definition={entry.definition} />;
+    }
 
     if (/^`[^`]+`$/.test(part)) return <code key={key}>{part.slice(1, -1)}</code>;
     if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={key}>{part.slice(2, -2)}</strong>;
@@ -68,7 +100,9 @@ function inline(text, keyBase) {
 }
 
 /** Splits the body into blocks and returns an array of React nodes. */
-export function renderMarkdown(body) {
+export function renderMarkdown(source) {
+  const { glossary, body } = parseGlossary(source);
+  const inline = (text, keyBase) => inlineWith(text, keyBase, glossary);
   const lines = String(body).replace(/\r\n/g, '\n').split('\n');
   const nodes = [];
   let i = 0;
@@ -196,7 +230,9 @@ export function renderMarkdown(body) {
   return nodes;
 }
 
-export function readingTime(body) {
+export function readingTime(source) {
+  // Glossary lines are reference material, not reading
+  const { body } = parseGlossary(source);
   const words = String(body).trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 210));
 }

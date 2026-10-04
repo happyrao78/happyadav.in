@@ -1,6 +1,5 @@
 import profile from '../content/profile.js';
 import { Emphasis } from './SectionHead.jsx';
-import { Arrow } from './Icons.jsx';
 
 /**
  * Social links deliberately live only in the footer. This block stays on the
@@ -24,19 +23,6 @@ export default function Contact() {
         <a className="contact-mail link" href={`mailto:${profile.email}`} data-reveal style={{ '--i': 3 }}>
           {profile.email}
         </a>
-
-        <div className="contact-actions" data-reveal style={{ '--i': 4 }}>
-          <a className="btn btn--solid" href={`mailto:${profile.email}`}>
-            <span>Send a message</span>
-            <Arrow />
-          </a>
-          <a className="btn" href={profile.resume} target="_blank" rel="noreferrer">
-            <span>Resume</span>
-          </a>
-          <a className="btn" href={`tel:${profile.phone.replace(/\s/g, '')}`}>
-            <span>{profile.phone}</span>
-          </a>
-        </div>
       </div>
     </section>
   );

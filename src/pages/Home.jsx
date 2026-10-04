@@ -3,11 +3,11 @@ import LogoStrip from '../components/LogoStrip.jsx';
 import Metrics from '../components/Metrics.jsx';
 import About from '../components/About.jsx';
 import Capabilities from '../components/Capabilities.jsx';
-import Ventures from '../components/Ventures.jsx';
 import Experience from '../components/Experience.jsx';
 import Projects from '../components/Projects.jsx';
 import Stack from '../components/Stack.jsx';
 import Recognition from '../components/Recognition.jsx';
+import Readings from '../components/Readings.jsx';
 import Contact from '../components/Contact.jsx';
 
 export default function Home() {
@@ -18,11 +18,11 @@ export default function Home() {
       <Metrics />
       <About />
       <Capabilities />
-      <Ventures />
       <Experience />
       <Projects />
       <Stack />
       <Recognition />
+      <Readings />
       <Contact />
     </>
   );

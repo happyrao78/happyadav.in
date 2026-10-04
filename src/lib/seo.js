@@ -81,7 +81,7 @@ export function applyJsonLd(posts = []) {
       email: `mailto:${profile.email}`,
       image: absolute(seo.image),
       description: seo.description,
-      sameAs: [links.github, links.linkedin, links.x, links.reddit],
+      sameAs: [links.github, links.linkedin, links.x, links.reddit, links.topmate, links.instagram],
       knowsAbout: [
         'Applied AI Engineering',
         'Real time voice AI',
@@ -113,24 +113,16 @@ export function applyJsonLd(posts = []) {
     },
   ];
 
-  profile.ventures.items.forEach((venture) => {
-    graph.push({
-      '@type': 'Organization',
-      name: venture.name,
-      url: venture.url,
-      description: venture.body,
-      founder: { '@id': `${seo.siteUrl}/#person` },
-    });
-  });
-
   posts.forEach((post) => {
     graph.push({
       '@type': 'BlogPosting',
-      '@id': `${seo.siteUrl}/blog/${post.slug}#post`,
+      '@id': `${seo.siteUrl}/readings/${post.slug}#post`,
       headline: post.title,
       description: post.summary,
       datePublished: post.date,
-      url: `${seo.siteUrl}/blog/${post.slug}`,
+      url: `${seo.siteUrl}/readings/${post.slug}`,
+      ...(post.updated ? { dateModified: post.updated } : {}),
+      ...(post.source ? { isBasedOn: post.source, citation: post.citation || post.source } : {}),
       author: { '@id': `${seo.siteUrl}/#person` },
       keywords: post.tags.join(', '),
     });

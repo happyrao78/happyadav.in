@@ -1,20 +1,24 @@
-/* Light palette and type lifted from the 360labs.ai design system.
-   The dark palette below is the same system inverted, keeping the teal accent. */
+/* Cool slate palette with a teal accent. The dark palette below is the same
+   system inverted. */
 :root {
-  /* Surface: warm off-white */
-  --paper: #fafaf7;
-  --paper-2: #f4f4ef;
+  /* Surface: cool, slate tinted off-white */
+  --paper: #f6f7f9;
+  --paper-2: #eef1f4;
   --paper-3: #ffffff;
 
   /* Ink */
-  --ink: #1a1a1a;
-  --ink-2: #4a4a48;
-  --ink-soft: #6c6e6b;
-  --ink-faint: #9a9a98;
+  --ink: #11151b;
+  --ink-2: #3e4651;
+  --ink-soft: #5f6874;
+  --ink-faint: #949ba6;
 
   /* Structure */
-  --line: #e5e5e5;
-  --line-soft: #ededea;
+  --line: #e1e5ea;
+  --line-soft: #eaedf1;
+
+  /* Background grid and the soft wash at the top of the page */
+  --grid: rgba(15, 23, 42, 0.05);
+  --glow: rgba(42, 176, 158, 0.07);
 
   /* Accent */
   --teal: #2ab09e;
@@ -22,11 +26,18 @@
   --teal-ink: #1d7f72;
 
   /* Chrome */
-  --nav-bg: rgba(255, 255, 255, 0.82);
+  /* Glass nav: translucent fill, frosted backdrop, light edge and inner highlight */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.28));
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-edge: rgba(15, 23, 42, 0.07);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+  --glass-btn: rgba(255, 255, 255, 0.45);
   --shadow: 0 6px 30px rgba(0, 0, 0, 0.06);
-  --logo-filter: grayscale(1);
-  --logo-filter-hover: grayscale(0);
-  --chip-img-filter: none;
+  /* Logos show in full colour; on dark they sit on a light tile so black marks stay visible */
+  --logo-tile: transparent;
+  --logo-tile-pad: 0;
+  --logo-tile-chip: var(--paper-3);
 
   /* Code blocks stay dark in both themes */
   --code-bg: #1a1a1a;
@@ -34,8 +45,10 @@
   --code-dim: rgba(232, 232, 228, 0.42);
 
   /* Type */
-  --font-sans: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-mono: 'Chivo Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Italic serif for the teal accent words in headings */
+  --font-accent: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 
   /* Scale */
   --t-hero: clamp(2.75rem, 7.2vw, 6.25rem);
@@ -67,27 +80,35 @@
 
 /* Explicit dark choice */
 :root[data-theme='dark'] {
-  --paper: #0e0e0f;
-  --paper-2: #17171a;
-  --paper-3: #131315;
+  --paper: #0b0e12;
+  --paper-2: #141920;
+  --paper-3: #10141a;
 
-  --ink: #f2f1ec;
-  --ink-2: #c6c5bf;
-  --ink-soft: #97978f;
-  --ink-faint: #6b6b66;
+  --ink: #edf1f6;
+  --ink-2: #c0c7d1;
+  --ink-soft: #8b94a1;
+  --ink-faint: #5f6876;
 
-  --line: #2a2a2d;
-  --line-soft: #212124;
+  --line: #232a33;
+  --line-soft: #1a2028;
+
+  --grid: rgba(148, 163, 184, 0.07);
+  --glow: rgba(53, 196, 176, 0.08);
 
   --teal: #35c4b0;
   --teal-soft: rgba(53, 196, 176, 0.14);
   --teal-ink: #7fdccd;
 
-  --nav-bg: rgba(19, 19, 21, 0.78);
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-edge: rgba(0, 0, 0, 0.4);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --glass-btn: rgba(255, 255, 255, 0.05);
   --shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
-  --logo-filter: grayscale(1) invert(1) brightness(1.5);
-  --logo-filter-hover: grayscale(1) invert(1) brightness(1.9);
-  --chip-img-filter: grayscale(1) invert(1) brightness(1.5);
+  --logo-tile: #eef1f5;
+  --logo-tile-pad: 0.2rem;
+  --logo-tile-chip: #eef1f5;
 
   --code-bg: #08080a;
 
@@ -97,27 +118,35 @@
 /* System preference, while the visitor has not chosen light explicitly */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper: #0e0e0f;
-    --paper-2: #17171a;
-    --paper-3: #131315;
+    --paper: #0b0e12;
+    --paper-2: #141920;
+    --paper-3: #10141a;
 
-    --ink: #f2f1ec;
-    --ink-2: #c6c5bf;
-    --ink-soft: #97978f;
-    --ink-faint: #6b6b66;
+    --ink: #edf1f6;
+    --ink-2: #c0c7d1;
+    --ink-soft: #8b94a1;
+    --ink-faint: #5f6876;
 
-    --line: #2a2a2d;
-    --line-soft: #212124;
+    --line: #232a33;
+    --line-soft: #1a2028;
+
+    --grid: rgba(148, 163, 184, 0.07);
+    --glow: rgba(53, 196, 176, 0.08);
 
     --teal: #35c4b0;
     --teal-soft: rgba(53, 196, 176, 0.14);
     --teal-ink: #7fdccd;
 
-    --nav-bg: rgba(19, 19, 21, 0.78);
+    --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-edge: rgba(0, 0, 0, 0.4);
+    --glass-highlight: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    --glass-btn: rgba(255, 255, 255, 0.05);
     --shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
-    --logo-filter: grayscale(1) invert(1) brightness(1.5);
-    --logo-filter-hover: grayscale(1) invert(1) brightness(1.9);
-    --chip-img-filter: grayscale(1) invert(1) brightness(1.5);
+    --logo-tile: #eef1f5;
+    --logo-tile-pad: 0.2rem;
+    --logo-tile-chip: #eef1f5;
 
     --code-bg: #08080a;
 

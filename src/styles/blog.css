@@ -1,4 +1,4 @@
-/* ---------- Empty state for the blog page ---------- */
+/* ---------- Empty state for Readings ---------- */
 
 .soon {
   border: 1px solid var(--line);
@@ -68,7 +68,10 @@
 }
 
 .page-title em {
-  font-style: normal;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--teal);
 }
 
@@ -79,7 +82,7 @@
   max-width: 46ch;
 }
 
-/* ---------- Blog index with posts ---------- */
+/* ---------- Readings index ---------- */
 
 .blog-controls {
   display: grid;
@@ -202,6 +205,12 @@
   color: var(--ink-faint);
 }
 
+.post-via {
+  color: var(--teal-ink);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
 .post-card-title {
   font-size: clamp(1.2rem, 2.3vw, 1.7rem);
   font-weight: 600;
@@ -242,6 +251,28 @@
   .post-card--lead {
     grid-column: 1 / -1;
   }
+  /* A card left alone on the last row takes the whole row, so the 1px divider
+     background never shows through as an empty tile */
+  .post-grid:not(.has-lead) .post-card:last-child:nth-child(odd),
+  .post-grid.has-lead .post-card:last-child:nth-child(even) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Home page: one column per reading, up to three */
+@media (min-width: 820px) {
+  .post-grid--home {
+    grid-template-columns: repeat(var(--count, 3), minmax(0, 1fr));
+  }
+  .post-grid--home .post-card:last-child {
+    grid-column: auto;
+  }
+}
+
+.readings-more {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
 }
 
 .empty {
@@ -295,12 +326,168 @@
   color: var(--ink-soft);
 }
 
+.article-head .post-meta time {
+  color: var(--ink-2);
+}
+
+/* The full reference, once, at the end of the article */
+.article-ref {
+  max-width: 44rem;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--teal);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--paper-3);
+  display: grid;
+  gap: 0.55rem;
+}
+
+.article-ref .label {
+  color: var(--ink-faint);
+}
+
+.article-ref a {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.article-ref strong {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: color 0.3s var(--ease);
+}
+
+.article-ref a:hover strong {
+  color: var(--teal);
+}
+
+.article-ref span {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.article-ref-citation {
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
 .article-body {
   max-width: 44rem;
   margin-inline: auto;
   font-size: 1.0625rem;
-  line-height: 1.72;
+  line-height: 1.75;
+  /* Full ink for long reading: the clearest contrast in both themes */
+  color: var(--ink);
+}
+
+/* ---------- Highlighted terms with hover definitions ---------- */
+
+.article-body mark,
+.term {
+  color: var(--teal-ink);
+  background: var(--teal-soft);
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 0 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.term {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dashed currentColor;
+  transition: background 0.2s var(--ease);
+}
+
+.term:hover,
+.term:focus-visible {
+  background: color-mix(in srgb, var(--teal) 24%, transparent);
+  outline: none;
+}
+
+.term-tip {
+  position: absolute;
+  z-index: 50;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: min(18rem, calc(100vw - 2rem));
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--paper-3);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
   color: var(--ink-2);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  text-align: left;
+  white-space: normal;
+  /* Closed tips take no layout space at all; even an invisible box past the
+     screen edge would let a phone scroll the page sideways */
+  display: none;
+  pointer-events: none;
+}
+
+.term-tip strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* The little pointer stays on the term even when the box is nudged sideways */
+.term-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: calc(50% - var(--dx, 0px));
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transform: translate(-50%, -5px) rotate(45deg);
+}
+
+.term-tip.is-below {
+  bottom: auto;
+  top: calc(100% + 10px);
+}
+
+.term-tip.is-below::after {
+  top: auto;
+  bottom: 100%;
+  transform: translate(-50%, 5px) rotate(225deg);
+}
+
+.term-tip.is-open {
+  display: block;
+  transform: translate(calc(-50% + var(--dx, 0px)), 0);
+  animation: tip-in 0.18s var(--ease);
+}
+
+.term-tip.is-open.is-below {
+  animation-name: tip-in-below;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px)), 4px);
+  }
+}
+
+@keyframes tip-in-below {
+  from {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px)), -4px);
+  }
 }
 
 .article-body > * + * {
@@ -322,6 +509,32 @@
 .article-body h4,
 .article-body h5 {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+/* A single # in a reading starts a new part: larger, with a rule above it.
+   ## headings are the sections inside that part. */
+.article-body h2 {
+  margin-top: clamp(3.5rem, 7vw, 4.75rem);
+  padding-top: clamp(1.75rem, 3.5vw, 2.25rem);
+  border-top: 1px solid var(--line);
+  font-size: clamp(1.65rem, 3.4vw, 2.3rem);
+  letter-spacing: -0.04em;
+}
+
+.article-body h3 {
+  margin-top: 2.5rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.article-body h2 + h3 {
+  margin-top: 1.75rem;
+}
+
+/* The fonts ship upright only, so let the browser slant italics */
+.article-body em {
+  font-synthesis: style;
 }
 
 .article-body strong {
@@ -497,6 +710,9 @@
 @media (min-width: 760px) {
   .post-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .post-nav a:only-child {
+    grid-column: 1 / -1;
   }
   .post-nav a:last-child:nth-child(2) {
     text-align: right;

@@ -1,6 +1,6 @@
 import profile from '../content/profile.js';
 import { Emphasis } from './SectionHead.jsx';
-import { Arrow } from './Icons.jsx';
+import { Arrow, ArrowUpRight } from './Icons.jsx';
 
 export default function Hero() {
   const { hero, wordmark } = profile;
@@ -28,11 +28,12 @@ export default function Hero() {
             </p>
             <div className="hero-actions">
               <a className="btn btn--solid" href="#work">
-                <span>See the work</span>
+                <span>{hero.cta.primary}</span>
                 <Arrow />
               </a>
-              <a className="btn" href={profile.resume} target="_blank" rel="noreferrer">
-                <span>Resume</span>
+              <a className="btn" href={profile.booking} target="_blank" rel="noopener noreferrer">
+                <span>{hero.cta.booking}</span>
+                <ArrowUpRight />
               </a>
             </div>
           </div>

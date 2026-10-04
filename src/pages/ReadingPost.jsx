@@ -24,7 +24,7 @@ function Progress() {
   return <div className="progress" style={{ '--p': value }} aria-hidden="true" />;
 }
 
-export default function BlogPost({ slug }) {
+export default function ReadingPost({ slug }) {
   const post = getPost(slug);
   const content = useMemo(() => (post ? renderMarkdown(post.body) : null), [post]);
 
@@ -34,16 +34,16 @@ export default function BlogPost({ slug }) {
         <div className="shell not-found">
           <p className="eyebrow">404</p>
           <h1 className="page-title">Post not found</h1>
-          <p className="page-lede">That link does not point at a published blog.</p>
+          <p className="page-lede">That link does not point at a published reading.</p>
           <a
             className="btn"
-            href="/blog"
+            href="/readings"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/blog');
+              navigate('/readings');
             }}
           >
-            <span>Back to the blogs</span>
+            <span>Back to readings</span>
             <Arrow />
           </a>
         </div>
@@ -61,18 +61,25 @@ export default function BlogPost({ slug }) {
       <div className="shell">
         <a
           className="back-link link"
-          href="/blog"
+          href="/readings"
           onClick={(e) => {
             e.preventDefault();
-            navigate('/blog');
+            navigate('/readings');
           }}
         >
-          &larr; All blogs
+          &larr; All readings
         </a>
 
         <header className="article-head">
           <p className="post-meta">
-            <span>{formatDate(post.date)}</span>
+            <span>
+              Posted <time dateTime={post.date}>{formatDate(post.date)}</time>
+            </span>
+            {post.updated ? (
+              <span>
+                Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+              </span>
+            ) : null}
             <span>{post.minutes} min read</span>
           </p>
           <h1 className="article-title">{post.title}</h1>
@@ -90,15 +97,27 @@ export default function BlogPost({ slug }) {
 
         <article className="article-body">{content}</article>
 
+
+        {post.source ? (
+          <aside className="article-ref" aria-label="Reference">
+            <p className="label">Reference</p>
+            {post.citation ? <p className="article-ref-citation">{post.citation}</p> : null}
+            <a href={post.source} target="_blank" rel="noopener noreferrer">
+              {post.citation ? null : <strong>{post.sourceName}</strong>}
+              <span>{post.source}</span>
+            </a>
+          </aside>
+        ) : null}
+
         <div className="article-foot">
           {newer || older ? (
             <nav className="post-nav">
               {older ? (
                 <a
-                  href={`/blog/${older.slug}`}
+                  href={`/readings/${older.slug}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    navigate(`/blog/${older.slug}`);
+                    navigate(`/readings/${older.slug}`);
                   }}
                 >
                   <span>Older</span>
@@ -107,10 +126,10 @@ export default function BlogPost({ slug }) {
               ) : null}
               {newer ? (
                 <a
-                  href={`/blog/${newer.slug}`}
+                  href={`/readings/${newer.slug}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    navigate(`/blog/${newer.slug}`);
+                    navigate(`/readings/${newer.slug}`);
                   }}
                 >
                   <span>Newer</span>

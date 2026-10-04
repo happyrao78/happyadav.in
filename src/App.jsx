@@ -6,9 +6,10 @@ import { posts, getPost } from './content/posts.js';
 import profile from './content/profile.js';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
+import ScrollButtons from './components/ScrollButtons.jsx';
 import Home from './pages/Home.jsx';
-import BlogIndex from './pages/BlogIndex.jsx';
-import BlogPost from './pages/BlogPost.jsx';
+import ReadingsIndex from './pages/ReadingsIndex.jsx';
+import ReadingPost from './pages/ReadingPost.jsx';
 
 export default function App() {
   const route = useRoute();
@@ -22,7 +23,7 @@ export default function App() {
       applySeo(
         post
           ? {
-              path: `/blog/${post.slug}`,
+              path: `/readings/${post.slug}`,
               title: `${post.title} | ${profile.name}`,
               description: post.summary,
               type: 'article',
@@ -30,8 +31,8 @@ export default function App() {
             }
           : { path: route, title: `Not found | ${profile.name}`, description: profile.seo.description },
       );
-    } else if (page === 'blog') {
-      applySeo({ path: '/blog', ...routes['/blog'] });
+    } else if (page === 'readings') {
+      applySeo({ path: '/readings', ...routes['/readings'] });
     } else {
       applySeo({ path: '/', ...routes['/'] });
     }
@@ -57,11 +58,12 @@ export default function App() {
       <div className="app">
         <Nav page={page} />
         <main id="main">
-          {page === 'blog' ? <BlogIndex /> : null}
-          {page === 'post' ? <BlogPost slug={slug} /> : null}
+          {page === 'readings' ? <ReadingsIndex /> : null}
+          {page === 'post' ? <ReadingPost slug={slug} /> : null}
           {page === 'home' ? <Home /> : null}
         </main>
         <Footer />
+        <ScrollButtons />
       </div>
     </>
   );
