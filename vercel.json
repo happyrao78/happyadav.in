@@ -21,8 +21,8 @@
     }
   ],
   "redirects": [
-    { "source": "/blog", "destination": "/readings", "permanent": true },
-    { "source": "/blog/:slug", "destination": "/readings/:slug", "permanent": true }
+    { "source": "/blog", "destination": "https://blogs.happyadav.in/readings", "permanent": true },
+    { "source": "/blog/:slug", "destination": "https://blogs.happyadav.in/readings/:slug", "permanent": true }
   ],
   "rewrites": [{ "source": "/((?!assets/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }]
 }
