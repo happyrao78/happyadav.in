@@ -20,28 +20,33 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
   ],
-  
-"redirects": [
-  {
-    "source": "/readings",
-    "destination": "https://blogs.happyadav.in/readings",
-    "permanent": true
-  },
-  {
-    "source": "/readings/:slug",
-    "destination": "https://blogs.happyadav.in/readings/:slug",
-    "permanent": true
-  },
-  {
-    "source": "/blog",
-    "destination": "https://blogs.happyadav.in/readings",
-    "permanent": true
-  },
-  {
-    "source": "/blog/:slug",
-    "destination": "https://blogs.happyadav.in/readings/:slug",
-    "permanent": true
-  }
-],
+  "redirects": [
+    {
+      "source": "/readings",
+      "missing": [{ "type": "host", "value": "blogs.happyadav.in" }],
+      "destination": "https://blogs.happyadav.in/readings",
+      "permanent": true
+    },
+    {
+      "source": "/readings/:slug",
+      "missing": [{ "type": "host", "value": "blogs.happyadav.in" }],
+      "destination": "https://blogs.happyadav.in/readings/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "missing": [{ "type": "host", "value": "blogs.happyadav.in" }],
+      "destination": "https://blogs.happyadav.in/readings",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug",
+      "missing": [{ "type": "host", "value": "blogs.happyadav.in" }],
+      "destination": "https://blogs.happyadav.in/readings/:slug",
+      "permanent": true
+    },
+    { "source": "/blog", "destination": "/readings", "permanent": true },
+    { "source": "/blog/:slug", "destination": "/readings/:slug", "permanent": true }
+  ],
   "rewrites": [{ "source": "/((?!assets/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }]
 }

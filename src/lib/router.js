@@ -42,8 +42,17 @@ export function useRoute() {
   return route;
 }
 
+const BLOG_HOST = 'blogs.happyadav.in';
+const MAIN_HOSTS = ['happyadav.in', 'www.happyadav.in'];
+
 export function navigate(path) {
   const next = normalise(path.startsWith('/') ? path : `/${path}`);
+  // Readings live on the blogs subdomain: go there directly instead of
+  // bouncing through the server redirect on the main domain.
+  if ((next === '/readings' || next.startsWith('/readings/')) && MAIN_HOSTS.includes(window.location.hostname)) {
+    window.location.assign(`https://${BLOG_HOST}${next}`);
+    return;
+  }
   if (readRoute() === next) return;
   window.history.pushState(null, '', next);
   window.dispatchEvent(new Event(NAV_EVENT));
